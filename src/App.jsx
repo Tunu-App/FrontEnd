@@ -7,6 +7,7 @@ import PasswordPage from "./Pages/PasswordPage";
 import VerifyPhoneNumber from "./Pages/VerifyPhoneNumber";
 import Login from "./Pages/Login";
 import GettingStartedPage from "./Pages/GettingStartedPage";
+import Home from "./Pages/Home";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path={"/signup-verify-phone"} exact>
             <VerifyPhoneNumber />
+          </Route>
+          <Route path={"/"} exact>
+            <Home />
           </Route>
         </Switch>
       </div>

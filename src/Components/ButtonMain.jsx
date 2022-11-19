@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function ButtonMain({ text, disabled, route }) {
+function ButtonMain({ text, disabled, route, actionCard }) {
   const history = useHistory();
 
   const handleClick = () => {
@@ -16,18 +16,29 @@ function ButtonMain({ text, disabled, route }) {
   };
   return (
     <div>
-      <button
-        onClick={() => {
-          handleClick();
-        }}
-        className={
-          disabled
-            ? "text-white bg-[#DCDEE0] w-full py-4 my-2 rounded-full"
-            : "text-white bg-[#0E816C] w-full py-4 my-2 rounded-full"
-        }
-      >
-        {text}
-      </button>
+      {!actionCard ? (
+        <button
+          onClick={() => {
+            handleClick();
+          }}
+          className={
+            disabled
+              ? "text-white bg-[#DCDEE0] w-full py-4 my-2 rounded-full"
+              : "text-white bg-[#0E816C] w-full py-4 my-2 rounded-full"
+          }
+        >
+          {text}
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            handleClick();
+          }}
+          className="text-black bg-white w-full py-4 my-2 rounded-full"
+        >
+          {text}
+        </button>
+      )}
     </div>
   );
 }
