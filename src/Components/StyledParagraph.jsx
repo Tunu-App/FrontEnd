@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function StyledParagraph({text}) {
+function StyledParagraph({ text, marginBtm }) {
   return (
-    <div className='text-[#404142]'>{text}</div>
-  )
+    <div style={{ marginBottom: `${marginBtm}` }} className="text-[#404142]">
+      {text}
+    </div>
+  );
 }
 
-export default StyledParagraph
+export default StyledParagraph;
