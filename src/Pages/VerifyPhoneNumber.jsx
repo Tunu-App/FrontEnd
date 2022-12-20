@@ -12,9 +12,9 @@ import PopupModal from "../Components/PopupModal";
 function VerifyPhoneNumber() {
   const [password, setPassword] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const { state } = useLocation();
-  console.log(state);
+
 
   function agreeToTC() {
     setTermsAndConditions(!termsAndConditions);
@@ -22,6 +22,10 @@ function VerifyPhoneNumber() {
 
   function getFirstname(e) {
     setPassword(e.target.value);
+  }
+
+  function openVerifyModal() {
+    setOpenModal(true);
   }
 
   const disableContBtn = () => {
@@ -112,6 +116,8 @@ function VerifyPhoneNumber() {
             text={"Continue"}
             disabled={disableContBtn()}
             route={pathDetails}
+            runClickFunction={true}
+            clickFunction={openVerifyModal}
           />
         </div>
 

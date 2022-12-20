@@ -1,10 +1,14 @@
 import React from "react";
 
-function StyledH1Text({ text, marginBtm }) {
+function StyledH1Text({ text, marginBtm, mode }) {
   return (
     <div
       style={{ marginBottom: `${marginBtm}` }}
-      className="text-[#111111] text-[24px] font-bold"
+      className={
+        mode
+          ? "text-white text-[24px] font-bold"
+          : "text-[#111111] text-[24px] font-bold"
+      }
     >
       {text}
     </div>

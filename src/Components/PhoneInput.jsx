@@ -74,7 +74,7 @@ function PhoneInput({ placeholder, getFunction, type }) {
 
           <input
             onChange={(e) => {
-              getFunction;
+              getFunction(e);
               setValue(e.target.value);
             }}
             type="text"

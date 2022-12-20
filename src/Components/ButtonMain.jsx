@@ -1,7 +1,15 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function ButtonMain({ text, disabled, route, actionCard }) {
+function ButtonMain({
+  text,
+  disabled,
+  route,
+  actionCard,
+  runClickFunction,
+  clickFunction,
+  nightMode,
+}) {
   const history = useHistory();
 
   const handleClick = () => {
@@ -18,8 +26,13 @@ function ButtonMain({ text, disabled, route, actionCard }) {
     <div>
       {!actionCard ? (
         <button
+          style={
+            nightMode
+              ? { backgroundColor: "white", color: "#111111" }
+              : { backgroundColor: "#DCDEE0", color: "white" }
+          }
           onClick={() => {
-            handleClick();
+            !runClickFunction ? handleClick() : clickFunction();
           }}
           className={
             disabled

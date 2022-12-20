@@ -7,12 +7,37 @@ import TextInput from "../Components/TextInput";
 import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
+import { AppContext } from "../Layout/Context";
+import { useContext } from "react";
+import axios, { Axios } from "axios";
 
 function PasswordPage() {
   const [password, setPassword] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const { state } = useLocation();
 
+  const { signUpUserData } = useContext(AppContext);
+  const { updateSignUpUserData } = useContext(AppContext);
+
+  const newUser = {
+    firstName: signUpUserData.firstName,
+    phoneNumber: signUpUserData.phoneNumber,
+    password: password,
+    email: signUpUserData.email,
+  };
+
+  function submitForm() {
+    const API = "https://api.tunu.com/v1/account/signup";
+
+    axios.post(API, newUser).then((res) => {
+      console.log(res).catch((err) => {
+        console.error(err);
+      });
+    });
+    console.log(signUpUserData);
+    updateSignUpUserData(newUser);
+    console.log(newUser);
+  }
 
   function agreeToTC() {
     setTermsAndConditions(!termsAndConditions);
@@ -58,7 +83,12 @@ function PasswordPage() {
           />
         </div>
 
-        <div className="mt-[100px]">
+        <div
+          onClick={() => {
+            submitForm();
+          }}
+          className="mt-[100px]"
+        >
           <ButtonMain
             text={"Continue"}
             disabled={disableContBtn()}

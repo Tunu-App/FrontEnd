@@ -8,8 +8,10 @@ function TunuActionCard({ heading, paragraph, color, btnText, btnRoute }) {
       className="w-full px-4 py-[24px] rounded-[15px]"
     >
       <div>
-        <h1 className="font-bold text-[22px] w-3/4 leading-[30px]">{heading}</h1>
-        <p className="w-3/4 mt-2">{paragraph}</p>
+        <h1 className="font-bold text-[22px] text-[#111111] w-full leading-[30px]">
+          {heading}
+        </h1>
+        <p className="w-11/12 mt-2">{paragraph}</p>
         <div className="mt-4">
           <ButtonMain text={btnText} route={btnRoute} actionCard={true} />
         </div>

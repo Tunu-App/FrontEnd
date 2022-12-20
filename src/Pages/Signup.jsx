@@ -6,10 +6,27 @@ import TextInput from "../Components/TextInput";
 import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
+import { AppContext } from "../Layout/Context";
+import { useContext } from "react";
+import { checkTime } from "../Layout/Utils";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
+  const { updateSignUpUserData } = useContext(AppContext);
+  const nightMode = checkTime()
+
+  const newUser = {
+    firstName: firstName,
+    phoneNumber: "",
+    password: "",
+    email: "",
+  };
+
+  function submitForm() {
+    updateSignUpUserData(newUser);
+    console.log(newUser);
+  }
 
   function agreeToTC() {
     setTermsAndConditions(!termsAndConditions);
@@ -25,6 +42,11 @@ function Signup() {
     } else {
       return false;
     }
+  };
+
+  const pathDetails = {
+    link: "/signup-contact-details",
+    data: {},
   };
 
   return (
@@ -45,6 +67,7 @@ function Signup() {
             placeholder={"First name"}
             getFunction={getFirstname}
             type={"text"}
+            seeText={true}
           />
         </div>
 
@@ -56,11 +79,16 @@ function Signup() {
             <span className="text-[#0E816C]"> Privacy Policy</span>
           </p>
         </div>
-        <div className="mt-[41px]">
+        <div
+          onClick={() => {
+            submitForm();
+          }}
+          className="mt-[41px]"
+        >
           <ButtonMain
             text={"Continue"}
             disabled={disableContBtn()}
-            link={"/signup-contact-details"}
+            route={pathDetails}
           />
         </div>
 

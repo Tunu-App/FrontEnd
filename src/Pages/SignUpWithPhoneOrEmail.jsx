@@ -6,14 +6,35 @@ import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import PhoneInput from "../Components/PhoneInput";
+import { useContext } from "react";
+import { AppContext } from "../Layout/Context";
 
 function SignUpWithPhoneOrEmail() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [useEmail, setUseEmail] = useState(false);
 
+  const { signUpUserData } = useContext(AppContext);
+  const { updateSignUpUserData } = useContext(AppContext);
+
+  const newUser = {
+    firstName: signUpUserData.firstName,
+    phoneNumber: phone,
+    password: "",
+    email: email,
+  };
+
+  function submitForm() {
+    console.log(signUpUserData)
+    updateSignUpUserData(newUser);
+    console.log(newUser);
+  }
+
   function getEmail(e) {
     setEmail(e.target.value);
+  }
+  function getPhone(e) {
+    setPhone(e.target.value);
   }
 
   const disableContBtn = () => {
@@ -23,12 +44,16 @@ function SignUpWithPhoneOrEmail() {
       } else {
         return false;
       }
+    } else if (!useEmail) {
+      return phoneChecker();
+    }
+  };
+
+  const phoneChecker = () => {
+    if (phone.trim().length <= 0) {
+      return true;
     } else {
-      if (phone.trim().length <= 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     }
   };
 
@@ -69,7 +94,7 @@ function SignUpWithPhoneOrEmail() {
               type={"text"}
             />
           ) : (
-            <PhoneInput />
+            <PhoneInput getFunction={getPhone} />
           )}
         </div>
 
@@ -88,7 +113,12 @@ function SignUpWithPhoneOrEmail() {
             <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
           </div>
         </div>
-        <div className="mt-[41px]">
+        <div
+          onClick={() => {
+            submitForm();
+          }}
+          className="mt-[41px]"
+        >
           <ButtonMain
             text={"Continue"}
             disabled={disableContBtn()}
