@@ -26,11 +26,11 @@ function ButtonMain({
     <div>
       {!actionCard ? (
         <button
-          style={
-            nightMode
-              ? { backgroundColor: "white", color: "#111111" }
-              : { backgroundColor: "#DCDEE0", color: "white" }
-          }
+          // style={
+          //   nightMode
+          //     ? { backgroundColor: "white", color: "#111111" }
+          //     : { backgroundColor: "#DCDEE0", color: "white" }
+          // }
           onClick={() => {
             !runClickFunction ? handleClick() : clickFunction();
           }}

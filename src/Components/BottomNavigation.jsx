@@ -36,7 +36,7 @@ function BottomNavigation({ nightMode }) {
       icon: <ExploreSVG />,
       nightIcon: exploreNightSVG(),
       text: "Explore",
-      link: "/",
+      link: "/explore",
     },
   ];
 

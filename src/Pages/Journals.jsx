@@ -1,7 +1,7 @@
 import React from "react";
 import { plusIcon } from "../assets/images/Vectors";
 import FilterTabs from "../Components/FilterTabs";
-
+import { Link } from "react-router-dom";
 function Journals() {
   const data = [
     {
@@ -30,16 +30,18 @@ function Journals() {
   function generateItems() {
     const cards = data.map((items, index) => {
       return (
-        <div
-          key={index}
-          className="bg-[#EFF2F4] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
-        >
-          {" "}
-          <p className="text-[16px] ">{items.title}</p>
-          <p className="text-[12px] opacity-70">
-            {items.chapter} <span>{items.time}</span>
-          </p>
-        </div>
+        <Link to={`/journals/text/${1}`}>
+          <div
+            key={index}
+            className="bg-[#EFF2F4] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
+          >
+            {" "}
+            <p className="text-[16px] ">{items.title}</p>
+            <p className="text-[12px] opacity-70">
+              {items.chapter} <span>{items.time}</span>
+            </p>
+          </div>
+        </Link>
       );
     });
 
@@ -58,10 +60,13 @@ function Journals() {
           <h1 className="text-[#111111] text-[28px] font-bold ">
             Your journals
           </h1>
-          <p className="text-[#0E816C] flex">
-            {" "}
-            <span className="mr-[8px]">{plusIcon()}</span> Write a journal
-          </p>
+
+          <Link to={"/add-journal"}>
+            <p className="text-[#0E816C] flex">
+              {" "}
+              <span className="mr-[8px]">{plusIcon()}</span> Write a journal
+            </p>
+          </Link>
         </div>
 
         <div className="pb-[19px] border-b border-[#EFF2F4]">

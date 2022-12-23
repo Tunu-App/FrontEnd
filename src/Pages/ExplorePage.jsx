@@ -35,7 +35,7 @@ function ExplorePage({ nightMode }) {
             }
             btnText={"Meditate"}
             color={"#FFBD3D"}
-            btnRoute={{ link: "/moodtracker", data: {} }}
+            btnRoute={{ link:"/meditate", data: {} }}
           />
         </div>
 
@@ -47,7 +47,7 @@ function ExplorePage({ nightMode }) {
             }
             btnText={"Explore"}
             color={"#5AA4FB"}
-            btnRoute={{ link: "/sleep", data: {} }}
+            btnRoute={{ link: "/explore/mental-wellness", data: {} }}
           />
         </div>
 

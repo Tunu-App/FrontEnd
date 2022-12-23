@@ -4,6 +4,11 @@ import ButtonSelect from "../Components/ButtonSelect";
 import { micVector } from "../assets/images/Vectors";
 
 function AddJournal() {
+  const pathDetails = {
+    link: "/journals",
+    data: "",
+  };
+
   return (
     <div className="mt-[120px] px-[15px]">
       <div className="mb-[20px]">
@@ -32,10 +37,14 @@ function AddJournal() {
 
       <div className="mt-[11px]">
         <div className="mb-[50px]">
-          <ButtonSelect text={"Record a voice note"} icon={micVector()} />
+          <ButtonSelect
+            text={"Record a voice note"}
+            icon={micVector()}
+            link={"/add-journal-voice"}
+          />
         </div>
         <div>
-          <ButtonMain text={"Save"} />
+          <ButtonMain text={"Save"} disabled={false} route={pathDetails} />
         </div>
       </div>
     </div>

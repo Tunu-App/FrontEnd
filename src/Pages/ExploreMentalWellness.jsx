@@ -19,7 +19,7 @@ function ExploreMentalWellness() {
           <FilterTabs />
         </div>
 
-        <div className="mt-[48px] mb-[172px] grid grid-cols-1 gap-4">
+        <div className="mt-[48px] mb-[172px] grid grid-cols-2 gap-4">
           {generateMeditateCardArray()}
         </div>
       </div>

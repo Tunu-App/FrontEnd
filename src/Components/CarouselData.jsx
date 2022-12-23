@@ -50,24 +50,28 @@ export const moodLiftersData = [
     caption: "Bola Balogun",
     time: "20 mins",
     image: sliderImage,
+    link:"/explore/moodlifters/:id/:1"
   },
   {
     heading: "Embracing gratitude",
     caption: "Bola Balogun",
     time: "20 mins",
     image: sliderImage,
+    link:"/explore/moodlifters/:id/:2"
   },
   {
     heading: "Embracing gratitude",
     caption: "Bola Balogun",
     time: "20 mins",
     image: sliderImage,
+    link:"/explore/moodlifters/:id/:3"
   },
   {
     heading: "Embracing gratitude",
     caption: "Bola Balogun",
     time: "20 mins",
     image: sliderImage,
+    link:"/explore/moodlifters/:id/:4"
   },
 ];
 
@@ -77,48 +81,56 @@ export const meditateData = [
     time: "25 mins",
     image: relax,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Yoga",
     time: "1h 25m",
     image: yoga1,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Yoga",
     time: "25 mins",
     image: yoga2,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Yoga",
     time: "1h 25m",
     image: yoga3,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Yoga",
     time: "1h 25m",
     image: relaxation,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Yoga",
     time: "1h 25m",
     image: yoga4,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Stretch",
     time: "1h 25m",
     image: stretch,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
   {
     heading: "Unwind",
     time: "1h 25m",
     image: unwind,
     icon: downloadIcon,
+    link:"/explore/moodlifters/:id"
   },
 ];
 export const sleepSoundsData = [
@@ -127,35 +139,41 @@ export const sleepSoundsData = [
     time: "1h 25m",
     image: ss1,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
   {
     heading: "So It Goes",
     time: "1h 25m",
     image: ss2,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
   {
     heading: "Alter Ego",
     time: "1h 25m",
     image: ss3,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
   {
     heading: "Iridescent",
     time: "1h 25m",
     image: ss4,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
   {
     heading: "Nightfall",
     time: "1h 25m",
     image: ss5,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
   {
     heading: "The Album",
     time: "1h 25m",
     image: ss6,
     icon: downloadIcon,
+    link:"/sleepsounds/:id"
   },
 ];

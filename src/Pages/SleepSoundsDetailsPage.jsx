@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import relaxation from "../assets/images/sleep-sounds.png";
 import {
   downloadVector,
@@ -11,34 +12,51 @@ function SleepSoundsDetailsPage() {
   const { id } = useParams();
 
   const data = [
-    { title: "How to log off from work", chapter: "Chapter 1 .", time: "25m" },
+    {
+      title: "How to log off from work",
+      chapter: "Chapter 1 .",
+      time: "25m",
+      link: "/sleepsounds/:id/:chapter",
+    },
     {
       title: "Getting into relaxation mode",
       chapter: "Chapter 2 .",
       time: "25m",
+      link: "/sleepsounds/:id/:chapter",
     },
-    { title: "Choosing how to relax", chapter: "Chapter 3 .", time: "25m" },
-    { title: "Relaxing actively", chapter: "Chapter 4 .", time: "25m" },
+    {
+      title: "Choosing how to relax",
+      chapter: "Chapter 3 .",
+      time: "25m",
+      link: "/sleepsounds/:id/:chapter",
+    },
+    {
+      title: "Relaxing actively",
+      chapter: "Chapter 4 .",
+      time: "25m",
+      link: "/sleepsounds/:id/:chapter",
+    },
     {
       title: "Reflecting on your time off work",
       chapter: "Chapter 5 .",
       time: "25m",
+      link: "/sleepsounds/:id/:chapter",
     },
   ];
 
   function generateItems() {
     const cards = data.map((items, index) => {
       return (
-        <div
-          key={index}
-          className="bg-[#5770C8] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
-        >
-          {" "}
-          <p className="text-[16px] text-white ">{items.title}</p>
-          <p className="text-[12px] text-white opacity-70">
-            {items.chapter} <span>{items.time}</span>
-          </p>
-        </div>
+       <Link to={items.link}> <div
+       key={index}
+       className="bg-[#5770C8] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
+     >
+       {" "}
+       <p className="text-[16px] text-white ">{items.title}</p>
+       <p className="text-[12px] text-white opacity-70">
+         {items.chapter} <span>{items.time}</span>
+       </p>
+     </div></Link>
       );
     });
 

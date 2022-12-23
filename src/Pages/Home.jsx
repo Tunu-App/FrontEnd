@@ -4,6 +4,7 @@ import TunuActionCard from "../Components/TunuActionCard";
 import CardCarousel from "../Components/CardCarousel";
 import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
 import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
+import { Link } from "react-router-dom";
 
 function Home({ nightMode }) {
   return (
@@ -48,9 +49,12 @@ function Home({ nightMode }) {
             Moodlifters for you
           </h1>
           <div className="flex items-center ">
+            <Link to={"/explore/moodlifters"}>
             <p id="font-lato" className="mr-2 text-[#0E816C]">
               View More
             </p>
+            </Link>
+           
             <div>
               <svg
                 width="8"
