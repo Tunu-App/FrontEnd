@@ -92,6 +92,7 @@ function SignUpWithPhoneOrEmail() {
               placeholder={"Email"}
               getFunction={getEmail}
               type={"text"}
+              seeText={true}
             />
           ) : (
             <PhoneInput getFunction={getPhone} />
@@ -106,7 +107,7 @@ function SignUpWithPhoneOrEmail() {
             }}
             className={
               useEmail
-                ? "w-[48px] h-[28px] bg-[#DCDEE0] bg-[#12A187] justify-end flex items-center rounded-full"
+                ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
                 : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
             }
           >

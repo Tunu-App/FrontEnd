@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import StyledH1Text from "../Components/StyledH1Text";
 import StyledParagraph from "../Components/StyledParagraph";
@@ -9,7 +9,7 @@ import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import { AppContext } from "../Layout/Context";
 import { useContext } from "react";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 function PasswordPage() {
   const [password, setPassword] = useState("");
@@ -26,17 +26,30 @@ function PasswordPage() {
     email: signUpUserData.email,
   };
 
-  function submitForm() {
-    const API = "https://api.tunu.com/v1/account/signup";
+  const test = {
+    firstName: "tochi",
+    phoneNumber: "123456",
+    password: "12345",
+    email: "tochinwachukwu33@gmail.com",
+  };
 
-    axios.post(API, newUser).then((res) => {
-      console.log(res).catch((err) => {
-        console.error(err);
+  const headers = {
+    "Access-Control-Allow-Origin": "http://127.0.0.1:5173/",
+    "Access-Control-Allow-Credentials": true,
+    "Content-Type":"application/json; charset=utf-8"
+  };
+
+  function submitForm() {
+    const API =
+      "http://tunuapi-dev.eu-west-2.elasticbeanstalk.com/v1/account/signup";
+    axios
+      .post(API, test, { headers: headers })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
-    console.log(signUpUserData);
-    updateSignUpUserData(newUser);
-    console.log(newUser);
   }
 
   function agreeToTC() {

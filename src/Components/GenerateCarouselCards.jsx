@@ -94,7 +94,7 @@ export function generateMeditateCardArray() {
 
 export function generateMeditateCard(index, heading, time, image, icon, link) {
   return (
-    <Link to={linkyarn}>
+    <Link to={link}>
       <div
         key={index}
         style={{ backgroundImage: `url(${image})` }}
