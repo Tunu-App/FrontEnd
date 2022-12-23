@@ -6,6 +6,7 @@ import TextInput from "../Components/TextInput";
 import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,26 @@ function Login() {
       idType: email != "" ? "EMAIL" : "PHONE",
     },
   };
+
+  const API =
+    "http://tunuapi-dev.eu-west-2.elasticbeanstalk.com/v1/account/signin";
+
+  const newUser = {
+    phoneNumber: "",
+    email: email,
+    password: password,
+  };
+
+  function submitForm() {
+    axios({ method: "post", url: API, data: newUser }).then(
+      (response) => {
+        console.log(response.data);
+      },
+      (error) => {
+        console.log(error.response.data);
+      }
+    );
+  }
 
   const disableContBtn = () => {
     if ((email.trim().length <= 0) | (password.trim().length <= 0)) {
@@ -64,7 +85,12 @@ function Login() {
             Forgot password?
           </p>
         </div>
-        <div className="mt-[24px]">
+        <div
+          onClick={() => {
+            submitForm();
+          }}
+          className="mt-[24px]"
+        >
           <ButtonMain
             text={"Log in"}
             disabled={disableContBtn()}

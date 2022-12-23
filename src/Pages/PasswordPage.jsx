@@ -9,7 +9,8 @@ import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import { AppContext } from "../Layout/Context";
 import { useContext } from "react";
-import axios from "axios";
+import axios, { Axios } from "axios";
+import { data } from "autoprefixer";
 
 function PasswordPage() {
   const [password, setPassword] = useState("");
@@ -33,23 +34,23 @@ function PasswordPage() {
     email: "tochinwachukwu33@gmail.com",
   };
 
-  const headers = {
-    "Access-Control-Allow-Origin": "http://127.0.0.1:5173/",
-    "Access-Control-Allow-Credentials": true,
-    "Content-Type":"application/json; charset=utf-8"
+  const API =
+    "http://tunuapi-dev.eu-west-2.elasticbeanstalk.com/v1/account/signup";
+
+  const header = {
+    contentType: "application/json",
+    
   };
 
   function submitForm() {
-    const API =
-      "http://tunuapi-dev.eu-west-2.elasticbeanstalk.com/v1/account/signup";
-    axios
-      .post(API, test, { headers: headers })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios({ method: "post", url: API, data: newUser}).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error.response.data);
+      }
+    );
   }
 
   function agreeToTC() {

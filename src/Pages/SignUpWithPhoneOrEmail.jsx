@@ -108,7 +108,7 @@ function SignUpWithPhoneOrEmail() {
             className={
               useEmail
                 ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
-                : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
+               : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
             }
           >
             <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
