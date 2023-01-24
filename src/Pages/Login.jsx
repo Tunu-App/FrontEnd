@@ -11,6 +11,7 @@ import axios from "axios";
 import { useContext } from "react";
 import UserContext from "../Layout/UserContext";
 import { setUserSession } from "../service/AuthService";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -137,8 +138,11 @@ function Login() {
 
         <div className="mt-[22px]">
           <p className="text-[#111111] text-center">
-            Already have an account?{" "}
-            <span className="text-[#0E816C]">Sign in</span>{" "}
+            Don’t have an account yet?{" "}
+            <span className="text-[#0E816C]">
+              {" "}
+              <Link to={"/signup"} >Sign up</Link>{" "}
+            </span>{" "}
           </p>
         </div>
       </div>
