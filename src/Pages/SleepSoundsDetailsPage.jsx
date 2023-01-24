@@ -1,5 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import axios from "axios";
+import { getToken } from "../service/AuthService";
 import { Link } from "react-router-dom";
 import relaxation from "../assets/images/sleep-sounds.png";
 import {
@@ -10,6 +12,8 @@ import {
 
 function SleepSoundsDetailsPage() {
   const { id } = useParams();
+  const { state } = useLocation();
+  console.log(state);
 
   const data = [
     {
@@ -45,18 +49,26 @@ function SleepSoundsDetailsPage() {
   ];
 
   function generateItems() {
-    const cards = data.map((items, index) => {
+    const cards = state.chapters.map((items, index) => {
       return (
-       <Link to={items.link}> <div
-       key={index}
-       className="bg-[#5770C8] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
-     >
-       {" "}
-       <p className="text-[16px] text-white ">{items.title}</p>
-       <p className="text-[12px] text-white opacity-70">
-         {items.chapter} <span>{items.time}</span>
-       </p>
-     </div></Link>
+        <Link
+          to={{
+            pathname: `/sleepsounds/${items.id}/:chapter${index + 1}`,
+            state: items,
+          }}
+        >
+          {" "}
+          <div
+            key={items.id}
+            className="bg-[#5770C8] mb-[8px] rounded-[12px] py-[16px] px-[20px]"
+          >
+            {" "}
+            <p className="text-[16px] text-white ">{items.title}</p>
+            <p className="text-[12px] text-white opacity-70">
+              Chapter {index + 1} <span>{items.time}</span>
+            </p>
+          </div>
+        </Link>
       );
     });
 
@@ -67,7 +79,7 @@ function SleepSoundsDetailsPage() {
     <div className="px-[15px] bg-[#3D55AB] min-h-screen">
       <div className="w-full grid place-items-center pt-[106px] ">
         <div
-          style={{ backgroundImage: `url(${relaxation})` }}
+          style={{ backgroundImage: `url(${state.thumbnail})` }}
           className="w-[200px] h-[200px] rounded-[16px] bg-cover"
         ></div>
       </div>
@@ -94,10 +106,7 @@ function SleepSoundsDetailsPage() {
           </div>
         </div>
 
-        <p className="mt-[18px] text-white opacity-70 ">
-          Leo molestie faucibus non enim orci. Dui nullam massa, molestie massa
-          arcu, sem. Maecenas imperdiet quam duis nunc aenean proin.{" "}
-        </p>
+        <p className="mt-[18px] text-white opacity-70 ">{state.description}</p>
       </div>
 
       <div className="mt-4 pb-[184px]">{generateItems()}</div>

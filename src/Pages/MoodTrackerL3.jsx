@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { moodData } from "../Components/MoodTrackerData";
 import { useHistory } from "react-router-dom";
+import { getUser } from "../service/AuthService";
+import { getUserName } from "../Layout/Utils";
 
 function MoodTrackerL3() {
   const history = useHistory();
@@ -8,9 +10,12 @@ function MoodTrackerL3() {
   const [selected, setSelected] = useState({});
   const [path, setPath] = useState(history.location.pathname.split(":")[1]);
 
+  // GETTING THE USERDETAILS FROM THE SESSION STORAGE
+  const user = getUser();
+
   function redirectToLevel2Mood(id) {
     history.push({
-      pathname: `/moodtracker/:${id}/:${id}`,
+      pathname: `/moodtracker/:${id}/:${id}/my-mood`,
       state: selected,
     });
   }
@@ -19,6 +24,7 @@ function MoodTrackerL3() {
     const moodCard = data.map((mood, index) => {
       return (
         <div
+          key={index}
           onClick={() => {
             redirectToLevel2Mood(mood.mood);
             setSelected(mood);
@@ -46,7 +52,7 @@ function MoodTrackerL3() {
 
       <div>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          Hello <span className="text-[#12A187]">Shola</span>,
+          Hello <span className="text-[#12A187]">{getUserName()}</span>,
         </h1>
         <h1 className="text-[#111111] font-bold text-[24px]">
           How are you feeling today?

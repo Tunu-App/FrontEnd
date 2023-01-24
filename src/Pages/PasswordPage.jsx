@@ -7,24 +7,31 @@ import TextInput from "../Components/TextInput";
 import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
-import { AppContext } from "../Layout/Context";
+import UserContext from "../Layout/UserContext";
 import { useContext } from "react";
 import axios, { Axios } from "axios";
 import { data } from "autoprefixer";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function PasswordPage() {
   const [password, setPassword] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
-  const { state } = useLocation();
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [pathDetails, setPathDetails] = useState({
+    link: "/signup-password",
+    data: "",
+  });
 
-  const { signUpUserData } = useContext(AppContext);
-  const { updateSignUpUserData } = useContext(AppContext);
+  const { signupData } = useContext(UserContext);
+  const { saveSignupData } = useContext(UserContext);
+  const history = useHistory();
 
   const newUser = {
-    firstName: signUpUserData.firstName,
-    phoneNumber: signUpUserData.phoneNumber,
+    firstName: signupData.firstName,
+    phoneNumber: signupData.phoneNumber,
     password: password,
-    email: signUpUserData.email,
+    email: signupData.email,
   };
 
   const test = {
@@ -35,20 +42,26 @@ function PasswordPage() {
   };
 
   const API =
-    "http://tunuapi-dev.eu-west-2.elasticbeanstalk.com/v1/account/signup";
+    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/account/signup";
 
   const header = {
     contentType: "application/json",
-    
   };
 
   function submitForm() {
-    axios({ method: "post", url: API, data: newUser}).then(
+    axios({ method: "post", url: API, data: newUser }).then(
       (response) => {
-        console.log(response);
+        if (response.data.status == true) {
+          saveSignupData(newUser)
+          history.push("/signup-verify-phone");
+        } else {
+          setErrorMessage(response.data.errors);
+          console.log(response.data);
+        }
       },
       (error) => {
-        console.log(error.response.data);
+        console.log(error.response.data.errors);
+        setErrorMessage(error.response.data.errors);
       }
     );
   }
@@ -67,11 +80,6 @@ function PasswordPage() {
     } else {
       return false;
     }
-  };
-
-  const pathDetails = {
-    link: "/signup-verify-phone",
-    data: state,
   };
 
   return (
@@ -96,6 +104,11 @@ function PasswordPage() {
             getFunction={getFirstname}
           />
         </div>
+        <div>
+          {errorMessage.map((item) => (
+            <p className="text-red-500">{item}</p>
+          ))}
+        </div>
 
         <div
           onClick={() => {
@@ -113,7 +126,9 @@ function PasswordPage() {
         <div className="mt-[22px]">
           <p className="text-[#111111] text-center">
             Already have an account?{" "}
-            <span className="text-[#0E816C]">Sign in</span>{" "}
+            <Link to={"/login"}>
+              <span className="text-[#0E816C]">Sign in</span>{" "}
+            </Link>
           </p>
         </div>
       </div>

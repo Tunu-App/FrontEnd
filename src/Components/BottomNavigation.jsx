@@ -18,7 +18,7 @@ function BottomNavigation({ nightMode }) {
       icon: <SmileSVG />,
       nightIcon: moodNightMode(),
       text: "Mood",
-      link: "/moodtracker",
+      link: "/moodtracker-home",
     },
     {
       icon: <JournalSVG />,

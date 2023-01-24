@@ -37,8 +37,12 @@ import ExploreMeditaionDetails from "./Pages/ExploreMeditaionDetails";
 import ExplorePlayMoodlifter from "./Pages/ExplorePlayMoodlifter";
 import CoachingPage from "./Pages/CoachingPage";
 import CoachBookingPage from "./Pages/CoachBookingPage";
-import { AppContext } from "./Layout/Context";
 import { checkTime } from "./Layout/Utils";
+import { UserProvider } from "./Layout/UserContext";
+import { PublicRoute } from "./Routes/PublicRoute";
+import { PrivateRoute } from "./Routes/PrivateRoute";
+import MoodTrackerFinalPage from "./Pages/MoodTrackerFinalPage";
+import MoodTrackerHomePage from "./Pages/MoodTrackerHomePage";
 
 function App() {
   const [signUpUserData, setSignUpUserData] = useState({
@@ -50,130 +54,179 @@ function App() {
 
   function updateSignUpUserData(payload) {
     setSignUpUserData(payload);
-    console.log(payload)
+    console.log(payload);
   }
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <AppContext.Provider
-            value={{ checkTime, signUpUserData, updateSignUpUserData }}
-          >
-            <Route path={"/getting-started"} exact>
-              <GettingStartedPage />
-            </Route>
-            <Route path={"/login"} exact>
-              <Login />
-            </Route>
-            <Route path={"/signup"} exact>
-              <Signup />
-            </Route>
-            <Route path={"/signup-contact-details"} exact>
-              <SignUpWithPhoneOrEmail />
-            </Route>
-            <Route path={"/signup-password"} exact>
-              <PasswordPage />
-            </Route>
-            <Route path={"/signup-verify-phone"} exact>
-              <VerifyPhoneNumber />
-            </Route>
+    <UserProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <PublicRoute
+              component={GettingStartedPage}
+              path={"/getting-started"}
+              exact
+            />
+            <PublicRoute component={Login} path={"/login"} exact />
+
+            <PublicRoute component={Signup} path={"/signup"} exact />
+            <PublicRoute
+              component={SignUpWithPhoneOrEmail}
+              path={"/signup-contact-details"}
+              exact
+            />
+            <PublicRoute
+              component={PasswordPage}
+              path={"/signup-password"}
+              exact
+            />
+            <PublicRoute
+              component={VerifyPhoneNumber}
+              path={"/signup-verify-phone"}
+              exact
+            />
 
             <Layout nightMode={checkTime}>
-              <Route path={"/"} exact>
-                <Home nightMode={checkTime} />
-              </Route>
-              <Route path={"/meditate"} exact>
-                <Meditate nightMode={checkTime} />
-              </Route>
-              <Route path={"/meditate/:id"} exact>
-                <MeditateDetailsPage />
-              </Route>
-              <Route path={"/meditate/:id/:chapter"} exact>
-                <PlayMeditation />
-              </Route>
-              <Route path={"/add-journal"} exact>
-                <AddJournal />
-              </Route>
-              <Route path={"/journals"} exact>
-                <Journals />
-              </Route>
-              <Route path={"/journals/text/:id"} exact>
-                <ViewTextJournal />
-              </Route>
-              <Route path={"/add-journal-voice"} exact>
-                <AddJournalVoice />
-              </Route>
-              <Route path={"/add-journal-voice/title"} exact>
-                <AddJournalVoiceTitlePage />
-              </Route>
-              <Route path={"/moodtracker"} exact>
-                <MoodTrackerL1 />
-              </Route>
+              <PrivateRoute component={Home} path={"/"} exact />
 
-              <Route path={"/moodtracker/:id"} exact>
-                <MoodTrackerL2 />
-              </Route>
-              <Route path={"/moodtracker/:id/:id"} exact>
-                <MoodTrackerL3 />
-              </Route>
-              <Route path={"/moodtracker/:id/:id/title"} exact>
-                <MoodTrackerTitlePage />
-              </Route>
-              <Route path={"/moodhistory"} exact>
-                <MoodHistory />
-              </Route>
-              <Route path={"/moodhistory/:id"} exact>
-                <ViewMoodDetails />
-              </Route>
-              <Route path={"/sleeptracker"} exact>
-                <SleepTracker nightMode={checkTime} />
-              </Route>
-              <Route path={"/sleeptracker/summary"} exact>
-                <SleepTrackerSummary nightMode={checkTime} />
-              </Route>
-              <Route path={"/sleep"} exact>
-                <Sleep nightMode={checkTime} />
-              </Route>
-              <Route path={"/sleepsounds"} exact>
-                <SleepSounds nightMode={checkTime} />
-              </Route>
-              <Route path={"/sleepsounds/:id"} exact>
-                <SleepSoundsDetailsPage />
-              </Route>
+              <PrivateRoute component={Meditate} path={"/meditate"} exact />
+              <PrivateRoute
+                component={MeditateDetailsPage}
+                path={"/meditate/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={PlayMeditation}
+                path={"/meditate/:id/:chapter"}
+                exact
+              />
 
-              <Route path={"/sleepsounds/:id/:chapter"} exact>
-                <PlaySleepSound />
-              </Route>
-              <Route path={"/explore"} exact>
-                <ExplorePage nightMode={checkTime} />
-              </Route>
-              <Route path={"/explore/meditation"} exact>
-                <ExploreMeditation nightMode={checkTime} />
-              </Route>
-              <Route path={"/explore/mental-wellness"} exact>
-                <ExploreMentalWellness nightMode={checkTime} />
-              </Route>
-              <Route path={"/explore/moodlifters"} exact>
-                <ExploreMentalWellness nightMode={checkTime} />
-              </Route>
-              <Route path={"/explore/moodlifters/:id"} exact>
-                <ExploreMeditaionDetails nightMode={checkTime} />
-              </Route>
-              <Route path={"/explore/moodlifters/:id/:chapter"} exact>
-                <ExplorePlayMoodlifter nightMode={checkTime} />
-              </Route>
-              <Route path={"/coaching"} exact>
-                <CoachingPage nightMode={checkTime} />
-              </Route>
-              <Route path={"/coaching/book"} exact>
-                <CoachBookingPage nightMode={checkTime} />
-              </Route>
+              <PrivateRoute
+                component={AddJournal}
+                path={"/add-journal"}
+                exact
+              />
+              <PrivateRoute component={Journals} path={"/journals"} exact />
+              <PrivateRoute
+                component={ViewTextJournal}
+                path={"/journals/text/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={AddJournalVoice}
+                path={"/add-journal-voice"}
+                exact
+              />
+              <PrivateRoute
+                component={AddJournalVoiceTitlePage}
+                path={"/add-journal-voice/title"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodTrackerHomePage}
+                path={"/moodtracker-home"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodTrackerL1}
+                path={"/moodtracker"}
+                exact
+              />
+
+              <PrivateRoute
+                component={MoodTrackerL2}
+                path={"/moodtracker/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodTrackerL3}
+                path={"/moodtracker/:id/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodTrackerTitlePage}
+                path={"/moodtracker/:id/:id/title"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodTrackerFinalPage}
+                path={"/moodtracker/:id/:id/my-mood"}
+                exact
+              />
+              <PrivateRoute
+                component={MoodHistory}
+                path={"/moodhistory"}
+                exact
+              />
+              <PrivateRoute
+                component={ViewMoodDetails}
+                path={"/moodhistory/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={SleepTracker}
+                path={"/sleeptracker"}
+                exact
+              />
+              <PrivateRoute
+                component={SleepTrackerSummary}
+                path={"/sleeptracker/summary"}
+                exact
+              />
+              <PrivateRoute component={Sleep} path={"/sleep"} exact />
+              <PrivateRoute
+                component={SleepSounds}
+                path={"/sleepsounds"}
+                exact
+              />
+              <PrivateRoute
+                component={SleepSoundsDetailsPage}
+                path={"/sleepsounds/:id"}
+                exact
+              />
+
+              <PrivateRoute
+                component={PlaySleepSound}
+                path={"/sleepsounds/:id/:chapter"}
+                exact
+              />
+              <PrivateRoute component={ExplorePage} path={"/explore"} exact />
+              <PrivateRoute
+                component={ExploreMeditation}
+                path={"/explore/meditation"}
+                exact
+              />
+              <PrivateRoute
+                component={ExploreMentalWellness}
+                path={"/explore/mental-wellness"}
+                exact
+              />
+              <PrivateRoute
+                component={ExploreMentalWellness}
+                path={"/explore/moodlifters"}
+                exact
+              />
+              <PrivateRoute
+                component={ExploreMeditaionDetails}
+                path={"/explore/moodlifters/:id"}
+                exact
+              />
+              <PrivateRoute
+                component={ExplorePlayMoodlifter}
+                path={"/explore/moodlifters/:id/:chapter"}
+                exact
+              />
+              <PrivateRoute component={CoachingPage} path={"/coaching"} exact />
+              <PrivateRoute
+                component={CoachBookingPage}
+                path={"/coaching/book"}
+                exact
+              />
             </Layout>
-          </AppContext.Provider>
-        </Switch>
-      </div>
-    </BrowserRouter>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

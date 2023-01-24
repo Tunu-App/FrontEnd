@@ -2,8 +2,11 @@ import React from "react";
 import { plusIcon } from "../assets/images/Vectors";
 
 import FilterTabs from "../Components/FilterTabs";
+import { checkTime } from "../Layout/Utils";
 
-function SleepTrackerSummary({ nightMode }) {
+function SleepTrackerSummary() {
+
+  const nightMode = checkTime
   const data = [
     {
       heading: "Bedtime",

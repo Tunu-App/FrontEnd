@@ -6,15 +6,16 @@ import TextInput from "../Components/TextInput";
 import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
-import { AppContext } from "../Layout/Context";
+import UserContext from "../Layout/UserContext";
 import { useContext } from "react";
 import { checkTime } from "../Layout/Utils";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
-  const { updateSignUpUserData } = useContext(AppContext);
-  const nightMode = checkTime()
+  const { saveSignupData } = useContext(UserContext);
+  const nightMode = checkTime();
 
   const newUser = {
     firstName: firstName,
@@ -24,8 +25,7 @@ function Signup() {
   };
 
   function submitForm() {
-    updateSignUpUserData(newUser);
-    console.log(newUser);
+    saveSignupData(newUser);
   }
 
   function agreeToTC() {
@@ -95,7 +95,9 @@ function Signup() {
         <div className="mt-[22px]">
           <p className="text-[#111111] text-center">
             Already have an account?{" "}
-            <span className="text-[#0E816C]">Sign in</span>{" "}
+            <Link to={"/login"}>
+              <span className="text-[#0E816C]">Sign in</span>{" "}
+            </Link>
           </p>
         </div>
       </div>

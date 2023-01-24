@@ -4,8 +4,10 @@ import TunuActionCard from "../Components/TunuActionCard";
 import CardCarousel from "../Components/CardCarousel";
 import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
 import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
+import { checkTime } from "../Layout/Utils";
 
-function ExplorePage({ nightMode }) {
+function ExplorePage() {
+ const  nightMode = checkTime
   return (
     <div className="flex relative flex-col mb-[48px] mt-[172px]">
       <div

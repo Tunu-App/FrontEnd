@@ -6,17 +6,10 @@ import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
 import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
 import { checkTime } from "../Layout/Utils";
 
-function Sleep() {
+function MoodTrackerHomePage() {
   const nightMode = checkTime;
   return (
     <div className="flex relative flex-col mb-[48px] mt-[172px]">
-      <div
-        className={
-          nightMode()
-            ? "w-full h-[210px] fixed top-0 z-[-10] bg-cover bg-center bg-no-repeat bg-[url('./assets/images/sleep-banner.png')]"
-            : "w-full h-[210px] fixed top-0 z-[-10] bg-cover bg-center bg-no-repeat bg-[url('./assets/images/sleep-banner.png')]"
-        }
-      ></div>
       <div
         className={
           nightMode()
@@ -26,24 +19,22 @@ function Sleep() {
       >
         <div className="mb-[17px]">
           <TunuActionCard
-            heading={"Listen to a sleep story or sound"}
-            paragraph={
-              "Explore our collection of sleep stories and sounds curated for you."
-            }
-            btnText={"Explore sleep sounds"}
-            color={"#12A187"}
-            btnRoute={{ link: "/sleepsounds", data: {} }}
+            heading={"Mood tracker"}
+            paragraph={"Take a moment to reflect on how you’re feeling today"}
+            btnText={"Track my mood"}
+            color={"#FFBD3D"}
+            btnRoute={{ link: "/moodtracker", data: {} }}
           />
         </div>
         <div className="">
           <TunuActionCard
-            heading={"Track your sleep"}
+            heading={"Mood history"}
             paragraph={
-              "Take a moment to assess some basic parameters of your sleep to see what needs improving. "
+              "See how your mood has changed since you started tracking. "
             }
-            btnText={"Track your sleep"}
-            color={"#4994EC"}
-            btnRoute={{ link: "/sleeptracker", data: {} }}
+            btnText={"See my mood history"}
+            color={"#5AA4FB"}
+            btnRoute={{ link: "/moodhistory", data: {} }}
           />
         </div>
 
@@ -53,4 +44,4 @@ function Sleep() {
   );
 }
 
-export default Sleep;
+export default MoodTrackerHomePage;

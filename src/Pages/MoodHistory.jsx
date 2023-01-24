@@ -1,60 +1,72 @@
+import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
 import { moreIcon, noteIcon, plusIcon } from "../assets/images/Vectors";
 import FilterTabs from "../Components/FilterTabs";
+import { getToken } from "../service/AuthService";
+import moment from "moment";
+import { Link } from "react-router-dom";
 
 function MoodHistory() {
-  const data = [
-    {
-      icon: "😫",
-      note: true,
-      title: "I feel overwhelmed",
+  const [moodData, setMoodData] = useState([]);
+  // THIS FUNCTION LISTS ALL THE USER'S SAVED MOODS
 
-      date: "Today",
-    },
-    {
-      icon: "😫",
-      note: false,
-      title: "I felt respected",
+  // GET THE USER'S SESSION TOKEN FROM THE SESSION STORAGE AND USE
+  const AUTHTOKEN = getToken();
 
-      date: "Yesterday",
-    },
-    {
-      icon: "😫",
-      note: true,
-      title: "I felt valued",
-      date: "2 days ago",
-    },
-    {
-      icon: "😫",
-      note: false,
-      title: "I felt annoyed",
+  // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
+  const API =
+    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/moodtracker";
 
-      date: "Oct 25",
-    },
-    {
-      icon: "😫",
-      note: true,
-      title: "I felt worried",
+  function getMoodData() {
+    axios({
+      method: "get",
+      url: API,
+      headers: {
+        Authorization: AUTHTOKEN,
+      },
+    }).then(
+      (response) => {
+        if (response.status == 200) {
+          setMoodData(response.data);
+          console.log(response.data);
+        } else {
+          // setError(response.data.errors[0]);
+          // console.log(response.data.data)
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
-      date: "Oct 24",
-    },
-  ];
+  useEffect(() => {
+    getMoodData();
+  }, []);
+
+  function ParseDate(dateString) {
+    const date = moment(dateString).format("ddd, MMM Do YYYY, h:mm:ss a");
+    // const today = moment("HH")
+    const shortDate = date.split(",")[1];
+    return shortDate;
+  }
 
   function generateItems() {
-    const cards = data.map((items, index) => {
+    const cards = moodData.map((items, index) => {
       return (
         <div
-          key={index}
+          key={items.id}
           className="bg-[#EFF2F4] flex mb-[8px] items-center justify-between rounded-[12px] py-[16px] px-[20px]"
         >
           {" "}
           <div className="flex items-center">
             <h1 className="font-bold text-[28px] mr-[10px]">{items.icon}</h1>
-            <p className="text-[16px] mr-[5px] ">{items.title}</p>
-            {items.note ? <div>{noteIcon()}</div> : ""}
+            <p className="text-[16px] mr-[5px] ">I felt {items.feeling}</p>
+            {items.note != "" ? <div>{noteIcon()}</div> : ""}
           </div>
           <p className="text-[14px] text-[#404142]">
-            {items.chapter} <span>{items.date}</span>
+            {items.chapter} <span>{ParseDate(items.updatedAt)}</span>
           </p>
           <div>{moreIcon()}</div>
         </div>
@@ -73,11 +85,12 @@ function MoodHistory() {
         }
       >
         <div className="flex justify-between items-center mb-[16px]">
-          <h1 className="text-[#111111] text-[28px] font-bold ">Your moods</h1>
-          <p className="text-[#0E816C] flex">
-            {" "}
-            <span className="mr-[8px]">{plusIcon()}</span> Track your mood
-          </p>
+          <h1 className="text-[#111111] text-[28px] font-bold ">Your moods</h1>{" "}
+          <Link to={"/moodtracker"}>
+            <p className="text-[#0E816C] flex">
+              <span className="mr-[2px]">{plusIcon()}</span> Track your mood
+            </p>
+          </Link>
         </div>
 
         <div className="pb-[19px] border-b border-[#EFF2F4]">

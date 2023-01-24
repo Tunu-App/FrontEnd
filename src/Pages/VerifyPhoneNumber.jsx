@@ -8,13 +8,15 @@ import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import PopupModal from "../Components/PopupModal";
+import UserContext from "../Layout/UserContext";
+import { useContext } from "react";
 
 function VerifyPhoneNumber() {
   const [password, setPassword] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { state } = useLocation();
-
+  const { signupData } = useContext(UserContext);
+  console.log("signupdats", signupData);
 
   function agreeToTC() {
     setTermsAndConditions(!termsAndConditions);
@@ -38,7 +40,7 @@ function VerifyPhoneNumber() {
 
   const pathDetails = {
     link: "/login",
-    data: state,
+    data: signupData,
   };
 
   function verifiedSuccessModal() {
@@ -56,7 +58,7 @@ function VerifyPhoneNumber() {
               Verified successfully
             </h1>
             <p className="text-[#404142] mt-[4px]">
-              {state.idType != "EMAIL"
+              {signupData.phoneNumber != ""
                 ? "Your phone number has been verified"
                 : "Your email has been verified"}
             </p>
@@ -83,7 +85,7 @@ function VerifyPhoneNumber() {
       <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
         <StyledH1Text
           text={
-            state.idType != "EMAIL"
+            signupData.phoneNumber != "" 
               ? "Verify your phone number "
               : "Verify your email"
           }
@@ -91,7 +93,7 @@ function VerifyPhoneNumber() {
         />
         <StyledParagraph
           text={
-            state.idType != "EMAIL"
+            signupData.phoneNumber != ""
               ? "Enter the code you just received via SMS to activate your account"
               : "Enter the code you just received via mail to activate your account"
           }

@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import StyledH1Text from "../Components/StyledH1Text";
 import TunuActionCard from "../Components/TunuActionCard";
 import CardCarousel from "../Components/CardCarousel";
 import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
 import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
 import { Link } from "react-router-dom";
+import UserContext from "../Layout/UserContext";
+import { checkTime, getUserName,  } from "../Layout/Utils";
+import { getUser } from "../service/AuthService";
 
-function Home({ nightMode }) {
+function Home() {
+  const nightMode = checkTime;
+
+
   return (
     <div className="flex relative flex-col mb-[48px] mt-[172px]">
       <div
@@ -26,7 +32,7 @@ function Home({ nightMode }) {
         <h1 className="text-[#111111] text-[28px] font-bold mb-[16px]">
           Hey{" "}
           <span className={nightMode() ? "text-[#A5B9FF]" : "text-[#12A187]"}>
-            Shola,
+            {getUserName()},
           </span>
         </h1>
         <StyledH1Text
@@ -50,11 +56,11 @@ function Home({ nightMode }) {
           </h1>
           <div className="flex items-center ">
             <Link to={"/explore/moodlifters"}>
-            <p id="font-lato" className="mr-2 text-[#0E816C]">
-              View More
-            </p>
+              <p id="font-lato" className="mr-2 text-[#0E816C]">
+                View More
+              </p>
             </Link>
-           
+
             <div>
               <svg
                 width="8"

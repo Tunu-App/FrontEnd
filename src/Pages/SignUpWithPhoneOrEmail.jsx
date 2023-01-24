@@ -6,28 +6,27 @@ import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import PhoneInput from "../Components/PhoneInput";
+import { Link } from "react-router-dom";
+import UserContext from "../Layout/UserContext";
 import { useContext } from "react";
-import { AppContext } from "../Layout/Context";
 
 function SignUpWithPhoneOrEmail() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [useEmail, setUseEmail] = useState(false);
-
-  const { signUpUserData } = useContext(AppContext);
-  const { updateSignUpUserData } = useContext(AppContext);
+  const { saveSignupData } = useContext(UserContext);
+  const { signupData } = useContext(UserContext);
+  console.log(signupData)
 
   const newUser = {
-    firstName: signUpUserData.firstName,
+    firstName: signupData.firstName,
     phoneNumber: phone,
     password: "",
     email: email,
   };
 
   function submitForm() {
-    console.log(signUpUserData)
-    updateSignUpUserData(newUser);
-    console.log(newUser);
+    saveSignupData(newUser);
   }
 
   function getEmail(e) {
@@ -108,7 +107,7 @@ function SignUpWithPhoneOrEmail() {
             className={
               useEmail
                 ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
-               : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
+                : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
             }
           >
             <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
@@ -130,7 +129,9 @@ function SignUpWithPhoneOrEmail() {
         <div className="mt-[22px]">
           <p className="text-[#111111] text-center">
             Already have an account?{" "}
-            <span className="text-[#0E816C]">Sign in</span>{" "}
+            <Link to={"/login"}>
+              <span className="text-[#0E816C]">Sign in</span>{" "}
+            </Link>
           </p>
         </div>
       </div>

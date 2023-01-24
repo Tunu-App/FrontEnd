@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { moodData } from "../Components/MoodTrackerData";
 import { useHistory } from "react-router-dom";
+import { getUserName } from "../Layout/Utils";
 
 function MoodTrackerL2() {
   const history = useHistory();
@@ -47,7 +48,7 @@ function MoodTrackerL2() {
 
       <div>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          Hello <span className="text-[#12A187]">Shola</span>,
+          Hello <span className="text-[#12A187]">{getUserName()}</span>,
         </h1>
         <h1 className="text-[#111111] font-bold text-[24px]">
           How are you feeling today?
