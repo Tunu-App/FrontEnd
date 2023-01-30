@@ -4,7 +4,7 @@ export function checkTime() {
   let date = new Date();
   let currTime = date.getHours();
 
-  if (currTime > 20) {
+  if (currTime > 1) {
     return true;
   } else {
     return false;

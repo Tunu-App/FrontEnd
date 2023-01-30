@@ -16,7 +16,7 @@ function SignUpWithPhoneOrEmail() {
   const [useEmail, setUseEmail] = useState(false);
   const { saveSignupData } = useContext(UserContext);
   const { signupData } = useContext(UserContext);
-  console.log(signupData)
+
 
   const newUser = {
     firstName: signupData.firstName,

@@ -1,13 +1,12 @@
 import React, { useState, useRef } from "react";
 import ButtonMain from "../Components/ButtonMain";
 import TextInput from "../Components/TextInput";
-import { amSleepQuestions } from "../Components/SleepQuestionsData";
 import { sleepTrackerQuestions } from "../Components/SleepQuestionsData";
-import { pmSleepQuestions } from "../Components/SleepQuestionsData";
 import ButtonSelect from "../Components/ButtonSelect";
 import { useHistory } from "react-router-dom";
 import { checkTime } from "../Layout/Utils";
 import TimeInput from "../Components/TimeInput";
+import { getToken } from "../service/AuthService";
 
 function SleepTracker() {
   let [questionId, setQuestionId] = useState(0);
@@ -15,37 +14,76 @@ function SleepTracker() {
   const history = useHistory();
   const nightMode = checkTime;
   // HERE THE USER'S INPUT IS RECORDED
+  const [dayTimeNaps, setDayTimeNaps] = useState(true);
+  const [sleepyDuringTheDay, setSleepyDuringTheDay] = useState(true);
+  const [coffeeBeforeBed, setCoffeeBeforeBed] = useState(true);
+  const [alcoholBeforeBed, setAlcoholBeforeBed] = useState(true);
   const [timeToBed, setTimeToBed] = useState("");
   const [sleepLatency, setSleepLatency] = useState(0);
   const [numberOfTimesWokenUp, setNumberOfTimesWokenUp] = useState(0);
   const [howLongToSLeepAfterInterruption, setHowLongToSLeepAfterInterruption] =
     useState(0);
   const [wakeUpTime, setWakeUpTime] = useState(0);
+  const [useMedications, setUseMedications] = useState(false);
   const [sleepQuality, setSleepQuality] = useState("");
+  const [wakeUpWithHeadache, setWakeUpWithHeadache] = useState(false);
 
-  const goToSummary = () => {
-    history.push({
-      pathname: "/sleeptracker/summary",
-      state: "data", // your data array of objects
-    });
-  };
+  // const goToSummary = () => {
+  //   // THIS FUNCTION POSTS THE USERS SLEEP DATA TO THE API ENDPOINT
+  
+  //   // GET THE USER'S SESSION TOKEN FROM THE SESSION STORAGE AND USE
+  //   const AUTHTOKEN = getToken();
+  
+  //   // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
+  //   const API =
+  //     "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/sound/sleep";
+  
+  //   function getSleepSounds() {
+  //     axios({
+  //       method: "get",
+  //       url: API,
+  //       headers: {
+  //         Authorization: AUTHTOKEN,
+  //       },
+  //     }).then(
+  //       (response) => {
+  //         if (response.status == 200) {
+  //           setSleepData(response.data);
+  //         } else {
+  //           // setError(response.data.errors[0]);
+  //           // console.log(response.data.data)
+  //         }
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  
+  //   useEffect(() => {
+  //     getSleepSounds();
+  //   }, []);
+  //   history.push({
+  //     pathname: "/sleeptracker/summary",
+  //     state: "data", // your data array of objects
+  //   });
+  // };
 
   function nextQuestion() {
     const totalQuestions = quizData.length;
 
-    if (questionId + 1 <= totalQuestions) {
-      setQuestionId((questionId += 1));
-    } else {
+    if (questionId == totalQuestions - 1) {
       goToSummary();
+    } else {
+      setQuestionId((questionId += 1));
     }
   }
   function prevQuestion() {
-    const totalQuestions = quizData.length;
-
-    if (questionId + 1 >= totalQuestions) {
-      setQuestionId((questionId -= 1));
+    console.log(questionId);
+    if (questionId == 0) {
+      setQuestionId(0);
     } else {
-      goToSummary();
+      setQuestionId((questionId -= 1));
     }
   }
 
@@ -82,40 +120,59 @@ function SleepTracker() {
   function getAnswersfromButtons(questionId, usersAnswer) {
     switch (questionId) {
       case 1:
-        setSleepLatency(usersAnswer);
+        setDayTimeNaps(usersAnswer);
         break;
       case 2:
-        console.log("questionId ==2");
-        setNumberOfTimesWokenUp(usersAnswer);
+        setSleepyDuringTheDay(usersAnswer);
         break;
       case 3:
-        console.log("questionid == 3");
+        setCoffeeBeforeBed(usersAnswer);
+        break;
+      case 4:
+        setAlcoholBeforeBed(usersAnswer);
+        break;
+      case 5:
+        setSleepLatency(usersAnswer);
+        break;
+      case 6:
+        setNumberOfTimesWokenUp(usersAnswer);
+        break;
+      case 7:
         setHowLongToSLeepAfterInterruption(usersAnswer);
         set;
         break;
-
-      case 4:
-        console.log("quesiton id ==4");
+      case 8:
         setWakeUpTime(usersAnswer);
         break;
-      case 5:
-        console.log("quesiton id ==4");
+      case 9:
+        setUseMedications(usersAnswer);
+        break;
+      case 10:
         setSleepQuality(usersAnswer);
+        break;
+      case 1:
+        setWakeUpWithHeadache(usersAnswer);
         break;
 
       default:
-        console.log("default case");
+        return null;
         break;
     }
   }
 
   const finalData = {
+    dayTimeNaps,
+    sleepyDuringTheDay,
+    coffeeBeforeBed,
+    alcoholBeforeBed,
     timeToBed,
     sleepLatency,
-    sleepQuality,
     howLongToSLeepAfterInterruption,
     numberOfTimesWokenUp,
     wakeUpTime,
+    useMedications,
+    sleepQuality,
+    wakeUpWithHeadache,
   };
 
   console.log(finalData);

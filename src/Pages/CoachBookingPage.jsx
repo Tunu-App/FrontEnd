@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import CalendlyComponent from "../Components/CalendlyComponent";
 
 function CoachBookingPage() {
   return (
-    <div>CoachBookingPage</div>
-  )
+    <div>
+      <CalendlyComponent />
+    </div>
+  );
 }
 
-export default CoachBookingPage
+export default CoachBookingPage;
