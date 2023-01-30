@@ -5,15 +5,15 @@ import { getUserName } from "../Layout/Utils";
 
 function MoodTrackerL2() {
   const history = useHistory();
-  const [moodArray, setMoodArray] = useState(moodData[0][1][1]);
   const [selected, setSelected] = useState({});
-  const [path, setPath] = useState(history.location.pathname.split(":")[1]);
+  const [path, setPath] = useState(history.location.pathname);
   console.log(path)
+  const l2MoodArray = history.location.state;
 
-  function redirectToLevel3Mood(id) {
+  function displayNextLevelMoodArray(id, NextLevelMoodData) {
     history.push({
-      pathname: `/moodtracker/:${id}/:${id}`,
-      state: selected,
+      pathname: `${path}/:${id}`,
+      state: NextLevelMoodData,
     });
   }
 
@@ -21,8 +21,9 @@ function MoodTrackerL2() {
     const moodCard = data.map((mood, index) => {
       return (
         <div
+          key={index}
           onClick={() => {
-            redirectToLevel3Mood(mood.mood);
+            displayNextLevelMoodArray(mood.mood, mood.l3);
             setSelected(mood);
           }}
           className={
@@ -58,7 +59,7 @@ function MoodTrackerL2() {
       <div className="mt-[14px]"></div>
 
       <div className="grid grid-cols-3 gap-[11px] mb-[101px]">
-        {renderMood(moodArray)}
+        {renderMood(l2MoodArray)}
       </div>
     </div>
   );

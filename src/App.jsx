@@ -9,7 +9,6 @@ import Login from "./Pages/Login";
 import GettingStartedPage from "./Pages/GettingStartedPage";
 import Home from "./Pages/Home";
 import Layout from "./Layout/Layout";
-import { useEffect, useState } from "react";
 import Meditate from "./Pages/Meditate";
 import MeditateDetailsPage from "./Pages/MeditateDetailsPage";
 import PlayMeditation from "./Pages/PlayMeditation";
@@ -45,18 +44,6 @@ import MoodTrackerFinalPage from "./Pages/MoodTrackerFinalPage";
 import MoodTrackerHomePage from "./Pages/MoodTrackerHomePage";
 
 function App() {
-  const [signUpUserData, setSignUpUserData] = useState({
-    firstName: "",
-    phoneNumber: "",
-    password: "",
-    email: "",
-  });
-
-  function updateSignUpUserData(payload) {
-    setSignUpUserData(payload);
-    console.log(payload);
-  }
-
   return (
     <UserProvider>
       <BrowserRouter>
@@ -150,7 +137,7 @@ function App() {
               />
               <PrivateRoute
                 component={MoodTrackerFinalPage}
-                path={"/moodtracker/:id/:id/my-mood"}
+                path={"/moodtracker/:id/:id/:id/my-mood"}
                 exact
               />
               <PrivateRoute

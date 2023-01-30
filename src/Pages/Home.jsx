@@ -6,12 +6,11 @@ import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
 import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
 import { Link } from "react-router-dom";
 import UserContext from "../Layout/UserContext";
-import { checkTime, getUserName,  } from "../Layout/Utils";
+import { checkTime, getSleepSoundsApiData, getUserName } from "../Layout/Utils";
 import { getUser } from "../service/AuthService";
 
 function Home() {
   const nightMode = checkTime;
-
 
   return (
     <div className="flex relative flex-col mb-[48px] mt-[172px]">
@@ -108,9 +107,11 @@ function Home() {
             Sleep sounds for you
           </h1>
           <div className="flex items-center ">
-            <p id="font-lato" className="mr-2 font-lato text-[#0E816C]">
-              View More
-            </p>
+            <Link to={"/sleepsounds"}>
+              <p id="font-lato" className="mr-2 text-[#0E816C]">
+                View More
+              </p>
+            </Link>
             <div>
               <svg
                 width="8"

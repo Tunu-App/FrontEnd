@@ -1,18 +1,33 @@
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { sleepSoundsData } from "./CarouselData";
 import { moodLiftersData } from "./CarouselData";
 import { meditateData } from "./CarouselData";
 import SlidingCard from "./SlidingCard";
+import { getSleepSoundsApiData } from "../Layout/Utils";
 
 export function generateSleepCarouselCards() {
+  const [sleepSoundsData, setSleepSoundsData] = useState([]);
+
+  async function getData() {
+    let result = await getSleepSoundsApiData();
+    setSleepSoundsData(result);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(sleepSoundsData);
+
   const cardArray = sleepSoundsData.map((item, index) => {
     return sleepSoundsCarouselCards(
       index,
-      item.heading,
+      item.title,
       item.time,
-      item.image,
+      item.thumbnail,
       item.icon,
-      item.link
+      `/sleepsounds/:${item.id}`,
+      item
     );
   });
 
@@ -26,14 +41,22 @@ export function generateSleepCarouselCards() {
   return data;
 }
 
-function sleepSoundsCarouselCards(index, heading, time, image, icon, link) {
+function sleepSoundsCarouselCards(
+  index,
+  heading,
+  time,
+  image,
+  icon,
+  link,
+  data
+) {
   return (
     <div className="w-full">
-      <Link to={link}>
+      <Link to={{ pathname: link, state: data }}>
         <div
           key={index}
           style={{ backgroundImage: `url(${image})` }}
-          className="w-full h-[200px] rounded-[16px] p-[10px] flex flex-col justify-between "
+          className="w-[200px] h-[200px] bg-center bg-cover rounded-[16px] p-[10px] flex flex-col justify-between "
         >
           <div className="flex justify-end">
             <div

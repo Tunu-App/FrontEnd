@@ -9,20 +9,21 @@ function MoodTrackerL1() {
 
   const history = useHistory();
 
-  function redirectToLevel2Mood(id) {
+  function displayNextLevelMoodArray(id, NextLevelMoodData) {
     history.push({
       pathname: `/moodtracker/:${id}`,
-      state: selected,
+      state: NextLevelMoodData,
     });
   }
 
   function renderMood(data) {
     const moodCard = data.map((mood, index) => {
+      console.log(mood);
       return (
         <div
+          key={index}
           onClick={() => {
-            redirectToLevel2Mood(mood.mood);
-            setSelected(mood);
+            displayNextLevelMoodArray(mood.mood, mood.l2);
           }}
           className={
             mood.mood == selected

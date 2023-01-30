@@ -6,17 +6,17 @@ import { getUserName } from "../Layout/Utils";
 
 function MoodTrackerL3() {
   const history = useHistory();
-  const [moodArray, setMoodArray] = useState(moodData[0][1][1][1][2]);
   const [selected, setSelected] = useState({});
-  const [path, setPath] = useState(history.location.pathname.split(":")[1]);
+  const path = history.location.pathname;
+  const l3MoodArray = history.location.state;
 
   // GETTING THE USERDETAILS FROM THE SESSION STORAGE
   const user = getUser();
 
-  function redirectToLevel2Mood(id) {
+  function displayNextLevelMoodArray(id, NextLevelMoodData) {
     history.push({
-      pathname: `/moodtracker/:${id}/:${id}/my-mood`,
-      state: selected,
+      pathname: `${path}/:${id}/my-mood`,
+      state: NextLevelMoodData,
     });
   }
 
@@ -26,7 +26,7 @@ function MoodTrackerL3() {
         <div
           key={index}
           onClick={() => {
-            redirectToLevel2Mood(mood.mood);
+            displayNextLevelMoodArray(mood.mood, mood);
             setSelected(mood);
           }}
           className={
@@ -62,7 +62,7 @@ function MoodTrackerL3() {
       <div className="mt-[14px]"></div>
 
       <div className="grid grid-cols-3 gap-[11px] mb-[101px]">
-        {renderMood(moodArray)}
+        {renderMood(l3MoodArray)}
       </div>
     </div>
   );

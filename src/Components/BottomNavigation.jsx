@@ -23,8 +23,8 @@ function BottomNavigation({ nightMode }) {
     {
       icon: <JournalSVG />,
       nightIcon: journalNightmode(),
-      text: "Journal",
-      link: "/journals",
+      text: "Coaching",
+      link: "/coaching",
     },
     {
       icon: <SleepSVG />,

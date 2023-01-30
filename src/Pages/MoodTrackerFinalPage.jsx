@@ -7,31 +7,20 @@ import { getToken } from "../service/AuthService";
 
 function MoodTrackerFinalPage() {
   const history = useHistory();
-  const [moodArray, setMoodArray] = useState(moodData[0][1][1][1][2]);
   const [selected, setSelected] = useState({});
-  const [path, setPath] = useState(history.location.pathname.split(":")[1]);
   const [moodNotes, setMoodNotes] = useState("");
+  const mood = history.location.state;
+  console.log(mood);
 
   const authToken = getToken();
 
   const moodPayload = {
-    feeling: "happy",
+    feeling: mood.mood,
     note: moodNotes,
   };
 
-  function redirectToLevel2Mood(id) {
-    history.push({
-      pathname: `/moodtracker/:${id}/:${id}`,
-      state: selected,
-    });
-  }
   const API =
     "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/moodtracker";
-  //   const config = {
-  //     headers: {
-  //       Authorization: authToken,
-  //     },
-  //   };
 
   const saveMood = () => {
     axios({
@@ -64,12 +53,12 @@ function MoodTrackerFinalPage() {
   return (
     <div className="mt-[120px] px-[15px]">
       <div className="mb-[5px]">
-        <h1 className="font-bold text-[48px]">😫</h1>
+        <h1 className="font-bold text-[48px]">{mood.icon}</h1>
       </div>
 
       <div>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          You feel <span className="text-[#12A187]">overwhelmed</span>,
+          You feel <span className="text-[#12A187]">{mood.mood}</span>,
         </h1>
         <p className="text-[#404142]">Care to share why you feel this way?</p>
       </div>

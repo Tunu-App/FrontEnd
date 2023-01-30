@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StyledH1Text from "../Components/StyledH1Text";
 import TunuActionCard from "../Components/TunuActionCard";
-import CardCarousel from "../Components/CardCarousel";
-import { generateMoodLftCardArray } from "../Components/GenerateCarouselCards";
-import { generateSleepCarouselCards } from "../Components/GenerateCarouselCards";
 import { checkTime } from "../Layout/Utils";
 
 function MoodTrackerHomePage() {
