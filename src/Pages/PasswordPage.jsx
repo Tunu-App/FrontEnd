@@ -53,7 +53,8 @@ function PasswordPage() {
       (response) => {
         if (response.data.status == true) {
           saveSignupData(newUser)
-          history.push("/signup-verify-phone");
+          // history.push("/signup-verify-phone");
+          history.push("/login");
         } else {
           setErrorMessage(response.data.errors);
           console.log(response.data);

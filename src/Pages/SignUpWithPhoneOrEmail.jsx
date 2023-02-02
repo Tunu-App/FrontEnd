@@ -22,7 +22,7 @@ function SignUpWithPhoneOrEmail() {
     firstName: signupData.firstName,
     phoneNumber: phone,
     password: "",
-    email: email,
+    email: email.trim().toLowerCase(),
   };
 
   function submitForm() {
@@ -33,7 +33,7 @@ function SignUpWithPhoneOrEmail() {
     setEmail(e.target.value);
   }
   function getPhone(e) {
-    setPhone(e.target.value);
+    setPhone(e.toString());
   }
 
   const disableContBtn = () => {

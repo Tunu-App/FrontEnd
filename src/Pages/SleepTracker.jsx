@@ -150,7 +150,7 @@ function SleepTracker() {
       case 10:
         setSleepQuality(usersAnswer);
         break;
-      case 1:
+      case 11:
         setWakeUpWithHeadache(usersAnswer);
         break;
 

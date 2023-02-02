@@ -13,15 +13,9 @@ function PhoneInput({ placeholder, getFunction, type }) {
 
   const generateCorrectPhoneNumber = (value) => {
     const phoneNumberString = value.toString();
-    const firstRawChar = phoneNumberString.substring(0, 1);
-    if (firstRawChar == "0") {
-      const fullnumber =
-        selectedCountry.dial_code + phoneNumberString.substring(0);
-      setValue(fullnumber);
-    } else {
-      setValue(selectedCountry.dial_code + phoneNumberString);
-    }
+    return selectedCountry.dial_code + phoneNumberString;
   };
+
 
   function openCountryModal(data) {
     const countryItem = data.map((country) => {
@@ -74,7 +68,8 @@ function PhoneInput({ placeholder, getFunction, type }) {
 
           <input
             onChange={(e) => {
-              getFunction(e);
+              // getFunction(generateCorrectPhoneNumber(e.target.value));
+              getFunction(e.target.value)
               setValue(e.target.value);
             }}
             type="text"
