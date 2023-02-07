@@ -41,8 +41,7 @@ function PasswordPage() {
     email: "tochinwachukwu33@gmail.com",
   };
 
-  const API =
-    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/account/signup";
+  const API = "https://api.tunu.io/v1/account/signup";
 
   const header = {
     contentType: "application/json",
@@ -52,16 +51,14 @@ function PasswordPage() {
     axios({ method: "post", url: API, data: newUser }).then(
       (response) => {
         if (response.data.status == true) {
-          saveSignupData(newUser)
+          saveSignupData(newUser);
           // history.push("/signup-verify-phone");
           history.push("/login");
         } else {
           setErrorMessage(response.data.errors);
-          console.log(response.data);
         }
       },
       (error) => {
-        console.log(error.response.data.errors);
         setErrorMessage(error.response.data.errors);
       }
     );

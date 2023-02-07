@@ -18,7 +18,7 @@ function MoodTrackerL1() {
 
   function renderMood(data) {
     const moodCard = data.map((mood, index) => {
-      console.log(mood);
+
       return (
         <div
           key={index}

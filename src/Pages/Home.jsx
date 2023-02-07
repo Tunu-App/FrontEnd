@@ -144,9 +144,9 @@ function Home() {
             paragraph={
               "Take a moment to assess some basic parameters of your sleep to see what needs improving. "
             }
-            btnText={"Track your sleep"}
+            btnText={"Coming soon"}
             color={"#4994EC"}
-            btnRoute={{ link: "/sleeptracker", data: {} }}
+            btnRoute={{ link: "/", data: {} }}
           />
         </div>
         <div className="mt-[48px]"></div>

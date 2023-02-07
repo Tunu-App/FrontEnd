@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import ReactAudioPlayer from "react-audio-player";
+import { useHistory, useLocation } from "react-router-dom";
+import { ToastProvider, useToasts } from "react-toast-notifications";
 import {
   adjustVector,
   downladLargeVector,
@@ -13,6 +14,8 @@ import SeekBar from "react-seekbar-component";
 import "react-seekbar-component/dist/index.css";
 
 function AudioPlayer({ audioUrl }) {
+  const { addToast } = useToasts();
+  const { pathname } = useLocation();
   let [value, setValue] = useState(0);
   const [volume, setVolume] = useState(1);
   const [seek, setSeek] = useState(0);
@@ -21,9 +24,36 @@ function AudioPlayer({ audioUrl }) {
   let [durationForSeek, setDurationForSeek] = useState();
   let [trackProgress, setTrackProgress] = useState("00:00:00");
   let [trackProgressForSeek, setTrackProgressForSeek] = useState(0);
+  const [webshareError, setWebshareError] = useState("");
   const audioRef = useRef(new Audio(audioUrl));
   const intervalRef = useRef();
   const isReady = useRef(false);
+
+  function sharepage() {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Explore this sleep sound by Tunu",
+          text: "Tunu Sleep Sound",
+          url: pathname,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) =>
+          addToast(error, {
+            appearance: "error",
+            autoDismiss: true,
+            autoDismissTimeout: 3000,
+          })
+        );
+    } else {
+      console.error("Browser doesn't support Web Share API");
+      addToast("Browser doesn't support Web Share API", {
+        appearance: "error",
+        autoDismiss: true,
+        autoDismissTimeout: 3000,
+      });
+    }
+  }
 
   // HANDLING THE PAUSING AND PLAYING OF THE AUDIO
   useEffect(() => {
@@ -134,7 +164,13 @@ function AudioPlayer({ audioUrl }) {
           <p>{audioDuration}</p>
         </div>
         <div className="grid grid-cols-5 gap-[20px] place-items-center">
-          <div>{adjustVector()}</div>
+          <div
+            onClick={() => {
+              sharepage();
+            }}
+          >
+            {adjustVector()}
+          </div>
           <div>{backwardsVector()}</div>
           <div
             onClick={() => {

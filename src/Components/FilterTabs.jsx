@@ -6,12 +6,12 @@ function FilterTabs() {
     {
       text: "All",
     },
-    {
-      text: "Available",
-    },
-    {
-      text: "Downloaded",
-    },
+    // {
+    //   text: "Available",
+    // },
+    // {
+    //   text: "Downloaded",
+    // },
   ];
 
   function generateMenus() {

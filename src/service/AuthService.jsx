@@ -16,7 +16,7 @@ export function setUserSession(user, token) {
   sessionStorage.setItem("user", JSON.stringify(user));
   sessionStorage.setItem("token", token);
 
-  console.log(user,token)
+
 }
 
 export function resetUserSession() {

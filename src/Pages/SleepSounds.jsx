@@ -19,8 +19,7 @@ function SleepSounds() {
   const AUTHTOKEN = getToken();
 
   // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
-  const API =
-    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/sound/sleep";
+  const API = "https://api.tunu.io/v1/sound/sleep";
 
   function getSleepSounds() {
     axios({
@@ -93,11 +92,12 @@ function SleepSounds() {
         <p className="text-[#A5B9FF]">Tap to play</p>
 
         <div>
-          <div className="w-[345px] mt-[17px] rounded-[15px] h-[345px] bg-[url('./assets/images/sleep-sounds.png')]"></div>
+          <div className="w-[345px] mt-[17px] rounded-[15px] h-[345px] bg-center bg-cover bg-[url('https://tunu-media.s3.eu-west-2.amazonaws.com/Tunusleepwallpaper.jpeg')]"></div>
         </div>
 
         <h1 className="text-white text-[24px] mt-[25px] mb-[21px] font-bold">
-          Explore <span className="text-[#A5B9FF]">My downloads</span>
+          Explore
+          {/* <span className="text-[#A5B9FF]">My downloads</span> */}
         </h1>
         {showDownloads && showDownloads()}
         <div>
@@ -119,6 +119,8 @@ function SleepSounds() {
               item
             );
           })}
+
+          {generateMeditateCardArray()}
         </div>
       </div>
     </div>

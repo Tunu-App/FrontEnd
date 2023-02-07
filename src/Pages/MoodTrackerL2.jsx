@@ -7,7 +7,7 @@ function MoodTrackerL2() {
   const history = useHistory();
   const [selected, setSelected] = useState({});
   const [path, setPath] = useState(history.location.pathname);
-  console.log(path)
+  console.log(path);
   const l2MoodArray = history.location.state;
 
   function displayNextLevelMoodArray(id, NextLevelMoodData) {
@@ -16,6 +16,8 @@ function MoodTrackerL2() {
       state: NextLevelMoodData,
     });
   }
+
+  const currentMood = history.location.pathname.split("/:")[1];
 
   function renderMood(data) {
     const moodCard = data.map((mood, index) => {
@@ -52,7 +54,8 @@ function MoodTrackerL2() {
           Hello <span className="text-[#12A187]">{getUserName()}</span>,
         </h1>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          How are you feeling today?
+          Why are you feeling{" "}
+          <span className="text-[#d3aa49]">{`${currentMood} ?`}</span> Are you ?
         </h1>
       </div>
 

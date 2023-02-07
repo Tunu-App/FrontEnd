@@ -20,6 +20,8 @@ function MoodTrackerL3() {
     });
   }
 
+  const currentMood = history.location.pathname.split("/:")[2];
+
   function renderMood(data) {
     const moodCard = data.map((mood, index) => {
       return (
@@ -55,7 +57,8 @@ function MoodTrackerL3() {
           Hello <span className="text-[#12A187]">{getUserName()}</span>,
         </h1>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          How are you feeling today?
+          Why are you feeling{" "}
+          <span className="text-[#d3aa49]">{`${currentMood} ?`}</span> Are you ?
         </h1>
       </div>
 

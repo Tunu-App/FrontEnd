@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { moodLiftersData } from "./CarouselData";
 import { meditateData } from "./CarouselData";
 import SlidingCard from "./SlidingCard";
-import { getSleepSoundsApiData } from "../Layout/Utils";
+import { getMeditateApiData, getSleepSoundsApiData } from "../Layout/Utils";
+import { getMoodliftersApiData } from "../Layout/Utils";
 
 export function generateSleepCarouselCards() {
   const [sleepSoundsData, setSleepSoundsData] = useState([]);
@@ -16,8 +16,6 @@ export function generateSleepCarouselCards() {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(sleepSoundsData);
 
   const cardArray = sleepSoundsData.map((item, index) => {
     return sleepSoundsCarouselCards(
@@ -79,6 +77,19 @@ function sleepSoundsCarouselCards(
 }
 
 export function generateMoodLftCardArray() {
+  const [moodLiftersData, setMoodliftersData] = useState([]);
+
+  // THIS FUNCTION GETS THE MOODLIFTERS DATA FROM THE API
+  async function getData() {
+    let result = await getMoodliftersApiData();
+    setMoodliftersData(result);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(moodLiftersData);
   const cardArray = moodLiftersData.map((item, index) => (
     <SlidingCard
       key={index}
@@ -101,32 +112,55 @@ export function generateMoodLftCardArray() {
 }
 
 export function generateMeditateCardArray() {
+  const [meditateData, setMeditateData] = useState([]);
+
+  // THIS FUNCTION GETS THE MEDITATION DATA FROM THE API
+  async function getData() {
+    let result = await getMeditateApiData();
+    setMeditateData(result);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(meditateData);
+
   const cardArray = meditateData.map((item, index) => {
     return generateMeditateCard(
-      index,
-      item.heading,
+      item.id,
+      item.title,
       item.time,
-      item.image,
+      item.thumbnail,
       item.icon,
-      item.link
+      `/sleepsounds/:${item.id}`,
+      item
     );
   });
 
   return cardArray;
 }
 
-export function generateMeditateCard(index, heading, time, image, icon, link) {
+export function generateMeditateCard(
+  index,
+  heading,
+  time,
+  image,
+  icon,
+  link,
+  data
+) {
   return (
-    <Link to={link}>
+    <Link to={{ pathname: link, state: data }}>
       <div
         key={index}
         style={{ backgroundImage: `url(${image})` }}
-        className="w-[165px] bg-cover h-[200px] rounded-[16px] p-[10px] flex flex-col justify-between "
+        className="w-[165px] bg-cover bg-center h-[200px] rounded-[16px] p-[10px] flex flex-col justify-between "
       >
         <div className="flex justify-end">
           <div
             style={{ backgroundImage: `url(${icon})` }}
-            className="w-[24px] h-[24px] bg-cover bg-no-repeat bg-[url('./assets/images/play-icon.png')]"
+            className="w-[24px] h-[24px] bg-center bg-cover bg-no-repeat bg-[url('./assets/images/play-icon.png')]"
           ></div>
         </div>
         <div>
@@ -159,7 +193,7 @@ export function generateSleepSoundsCard(
         <div className="flex justify-end">
           <div
             style={{ backgroundImage: `url(${icon})` }}
-            className="w-[24px] h-[24px] bg-cover bg-no-repeat bg-[url('./assets/images/play-icon.png')]"
+            className="w-[24px] h-[24px]  bg-center bg-cover bg-no-repeat bg-[url('./assets/images/play-icon.png')]"
           ></div>
         </div>
         <div>

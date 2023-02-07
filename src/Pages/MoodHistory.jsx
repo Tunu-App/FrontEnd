@@ -15,8 +15,7 @@ function MoodHistory() {
   const AUTHTOKEN = getToken();
 
   // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
-  const API =
-    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/moodtracker";
+  const API = "https://api.tunu.io/v1/moodtracker";
 
   function getMoodData() {
     axios({
@@ -55,21 +54,23 @@ function MoodHistory() {
   function generateItems() {
     const cards = moodData.map((items, index) => {
       return (
-        <div
-          key={items.id}
-          className="bg-[#EFF2F4] flex mb-[8px] items-center justify-between rounded-[12px] py-[16px] px-[20px]"
-        >
-          {" "}
-          <div className="flex items-center">
-            <h1 className="font-bold text-[28px] mr-[10px]">{items.icon}</h1>
-            <p className="text-[16px] mr-[5px] ">I felt {items.feeling}</p>
-            {items.note != "" ? <div>{noteIcon()}</div> : ""}
+        <Link to={{ pathname: `moodhistory/:${items.id}`, state: items }}>
+          <div
+            key={items.id}
+            className="bg-[#EFF2F4] flex mb-[8px] items-center justify-between rounded-[12px] py-[16px] px-[20px]"
+          >
+            {" "}
+            <div className="flex items-center">
+              <h1 className="font-bold text-[28px] mr-[10px]">{items.icon}</h1>
+              <p className="text-[16px] mr-[5px] ">I felt {items.feeling}</p>
+              {items.note != "" ? <div>{noteIcon()}</div> : ""}
+            </div>
+            <p className="text-[14px] text-[#404142]">
+              {items.chapter} <span>{ParseDate(items.updatedAt)}</span>
+            </p>
+            <div>{moreIcon()}</div>
           </div>
-          <p className="text-[14px] text-[#404142]">
-            {items.chapter} <span>{ParseDate(items.updatedAt)}</span>
-          </p>
-          <div>{moreIcon()}</div>
-        </div>
+        </Link>
       );
     });
 
@@ -105,7 +106,15 @@ function MoodHistory() {
           <FilterTabs />
         </div>
 
-        <div className="mt-[20px] mb-[125px]">{generateItems()}</div>
+        <div className="mt-[20px] mb-[125px]">
+          {moodData ? (
+            generateItems()
+          ) : (
+            <p className="text-[#4a4747b3]">
+              Nothing here yet. Track your mood to get started.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

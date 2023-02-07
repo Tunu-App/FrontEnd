@@ -39,7 +39,7 @@ function AudioRecorder() {
     setInterval(() => {
       count += 1;
       setRecTime(formatTime(count));
-      console.log(count);
+
     }, 1000);
   }
 

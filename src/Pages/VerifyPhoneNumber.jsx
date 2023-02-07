@@ -16,7 +16,6 @@ function VerifyPhoneNumber() {
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { signupData } = useContext(UserContext);
-  console.log("signupdats", signupData);
 
   function agreeToTC() {
     setTermsAndConditions(!termsAndConditions);
@@ -85,7 +84,7 @@ function VerifyPhoneNumber() {
       <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
         <StyledH1Text
           text={
-            signupData.phoneNumber != "" 
+            signupData.phoneNumber != ""
               ? "Verify your phone number "
               : "Verify your email"
           }

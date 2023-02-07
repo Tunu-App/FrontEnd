@@ -36,7 +36,7 @@ function SleepTracker() {
   
   //   // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
   //   const API =
-  //     "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/sound/sleep";
+  //     "https://api.tunu.io/v1/sound/sleep";
   
   //   function getSleepSounds() {
   //     axios({
@@ -175,7 +175,7 @@ function SleepTracker() {
     wakeUpWithHeadache,
   };
 
-  console.log(finalData);
+
   function renderOptions(questions) {
     if (questions.inputType == "TIME" && questions.timeType == "SLEEPTIME") {
       return <TimeInput getFunction={getTimeToBed} />;

@@ -41,9 +41,9 @@ function Sleep() {
             paragraph={
               "Take a moment to assess some basic parameters of your sleep to see what needs improving. "
             }
-            btnText={"Track your sleep"}
+            btnText={"Coming Soon"}
             color={"#4994EC"}
-            btnRoute={{ link: "/sleeptracker", data: {} }}
+            btnRoute={{ link: "/sleep", data: {} }}
           />
         </div>
 

@@ -10,7 +10,7 @@ function MoodTrackerFinalPage() {
   const [selected, setSelected] = useState({});
   const [moodNotes, setMoodNotes] = useState("");
   const mood = history.location.state;
-  console.log(mood);
+
 
   const authToken = getToken();
 
@@ -20,7 +20,7 @@ function MoodTrackerFinalPage() {
   };
 
   const API =
-    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/moodtracker";
+    "https://api.tunu.io/v1/moodtracker";
 
   const saveMood = () => {
     axios({

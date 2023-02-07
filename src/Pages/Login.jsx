@@ -45,8 +45,7 @@ function Login() {
   }
   const history = useHistory();
 
-  const API =
-    "http://tunuapi-staging.eu-west-2.elasticbeanstalk.com/v1/account/signin";
+  const API = "https://api.tunu.io/v1/account/signin";
 
   const newUser = {
     phoneNumber: phoneNumber,
@@ -68,7 +67,6 @@ function Login() {
       },
       (error) => {
         setError(error.response.data.errors[0]);
-        console.log(error.response.data.errors[0]);
       }
     );
   }
@@ -141,7 +139,7 @@ function Login() {
             Don’t have an account yet?{" "}
             <span className="text-[#0E816C]">
               {" "}
-              <Link to={"/signup"} >Sign up</Link>{" "}
+              <Link to={"/signup"}>Sign up</Link>{" "}
             </span>{" "}
           </p>
         </div>

@@ -13,40 +13,7 @@ import {
 function SleepSoundsDetailsPage() {
   const { id } = useParams();
   const { state } = useLocation();
-  console.log(state);
 
-  const data = [
-    {
-      title: "How to log off from work",
-      chapter: "Chapter 1 .",
-      time: "25m",
-      link: "/sleepsounds/:id/:chapter",
-    },
-    {
-      title: "Getting into relaxation mode",
-      chapter: "Chapter 2 .",
-      time: "25m",
-      link: "/sleepsounds/:id/:chapter",
-    },
-    {
-      title: "Choosing how to relax",
-      chapter: "Chapter 3 .",
-      time: "25m",
-      link: "/sleepsounds/:id/:chapter",
-    },
-    {
-      title: "Relaxing actively",
-      chapter: "Chapter 4 .",
-      time: "25m",
-      link: "/sleepsounds/:id/:chapter",
-    },
-    {
-      title: "Reflecting on your time off work",
-      chapter: "Chapter 5 .",
-      time: "25m",
-      link: "/sleepsounds/:id/:chapter",
-    },
-  ];
 
   function generateItems() {
     const cards = state.chapters.map((items, index) => {
@@ -80,7 +47,7 @@ function SleepSoundsDetailsPage() {
       <div className="w-full grid place-items-center pt-[106px] ">
         <div
           style={{ backgroundImage: `url(${state.thumbnail})` }}
-          className="w-[200px] h-[200px] rounded-[16px] bg-cover"
+          className="w-[200px] h-[200px] rounded-[16px] bg-center bg-cover"
         ></div>
       </div>
 
