@@ -55,6 +55,14 @@ function AudioPlayer({ audioUrl }) {
     }
   }
 
+  function downloadSound() {
+    addToast("Oops.. you can only stream sounds on the web version", {
+      appearance: "error",
+      autoDismiss: true,
+      autoDismissTimeout: 3000,
+    });
+  }
+
   // HANDLING THE PAUSING AND PLAYING OF THE AUDIO
   useEffect(() => {
     if (isPlaying) {
@@ -182,7 +190,13 @@ function AudioPlayer({ audioUrl }) {
           <div>{forwardVector()}</div>
           <div>
             {" "}
-            <a href={audioUrl}>{downladLargeVector()}</a>{" "}
+            <a
+              onClick={() => {
+                downloadSound();
+              }}
+            >
+              {downladLargeVector()}
+            </a>{" "}
           </div>
         </div>
       </div>

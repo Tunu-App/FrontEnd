@@ -32,13 +32,14 @@ function Login() {
   }
   function getText(e) {
     const text = e.target.value;
+    const formattedText = text.trim().toLowerCase();
     var letters = /^[A-Za-z]+$/;
-    if (text.length > 0) {
-      if (text[0].match(letters)) {
-        setEmail(text);
+    if (formattedText.length > 0) {
+      if (formattedText[0].match(letters)) {
+        setEmail(formattedText);
         setPhoneNumber("");
       } else {
-        setPhoneNumber(text);
+        setPhoneNumber(formattedText);
         setEmail("");
       }
     }

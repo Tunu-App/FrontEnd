@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardCarousel from "../Components/CardCarousel";
-import { getToken } from "../service/AuthService";
 import { Link } from "react-router-dom";
-import FilterTabs from "../Components/FilterTabs";
-import axios from "axios";
 import {
   generateMeditateCardArray,
   generateSleepCarouselCards,
@@ -11,42 +8,10 @@ import {
 import TunuActionCard from "../Components/TunuActionCard";
 
 function SleepSounds() {
-  const [showDownloads, setShowDownloads] = useState(false);
-  const [sleepData, setSleepData] = useState([]);
-  // THIS FUNCTION LISTS ALL THE USER'S SAVED MOODS
-
-  // GET THE USER'S SESSION TOKEN FROM THE SESSION STORAGE AND USE
-  const AUTHTOKEN = getToken();
-
-  // MAKE A SIMPLE REQUEST TO GET THE USER'S DATA FROM THE API ENDPOINT ONCE THE PAGE LOADS
-  const API = "https://api.tunu.io/v1/sound/sleep";
-
-  function getSleepSounds() {
-    axios({
-      method: "get",
-      url: API,
-      headers: {
-        Authorization: AUTHTOKEN,
-      },
-    }).then(
-      (response) => {
-        if (response.status == 200) {
-          setSleepData(response.data);
-        } else {
-          // setError(response.data.errors[0]);
-          // console.log(response.data.data)
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  useEffect(() => {
-    getSleepSounds();
-  }, []);
-
+  const [selectedMenu, setSelectedMenu] = useState("ALL");
+  const allSounds = displayAllSounds();
+  const sleepSounds = generateSleepCarouselCards().array;
+  const meditationSounds = generateMeditateCardArray();
   const data = [
     {
       text: "all",
@@ -69,13 +34,27 @@ function SleepSounds() {
     return data.map((item, index) => {
       return (
         <div
-          key={index}
-          className="px-[12px] py-[4px] bg-[#E7E3FF] rounded-full mr-[8px]"
+          onClick={() => {
+            setSelectedMenu(item.text.toUpperCase());
+          }}
+          key={index * Math.ceil(Math.random() * 10000 * 4)}
+          className={
+            item.text.toUpperCase() == selectedMenu
+              ? "px-[8px] py-[4px] bg-[#aba3d9] text-white rounded-full mr-[8px]"
+              : "px-[8px] py-[4px] bg-[#E7E3FF] rounded-full mr-[8px]"
+          }
         >
           {item.text}
         </div>
       );
     });
+  }
+
+  function displayAllSounds() {
+    const meditateSounds = generateMeditateCardArray();
+    const sleepSounds = generateSleepCarouselCards().array;
+    const allSounds = meditateSounds.concat(sleepSounds);
+    return allSounds;
   }
 
   return (
@@ -92,14 +71,14 @@ function SleepSounds() {
         <p className="text-[#A5B9FF]">Tap to play</p>
 
         <div>
-          <div className="w-[345px] mt-[17px] rounded-[15px] h-[345px] bg-center bg-cover bg-[url('https://tunu-media.s3.eu-west-2.amazonaws.com/Tunusleepwallpaper.jpeg')]"></div>
+          <div className="w-full mt-[17px] rounded-[15px] h-[345px] bg-center bg-cover bg-[url('https://tunu-media.s3.eu-west-2.amazonaws.com/Tunusleepwallpaper.jpeg')]"></div>
         </div>
 
         <h1 className="text-white text-[24px] mt-[25px] mb-[21px] font-bold">
           Explore
           {/* <span className="text-[#A5B9FF]">My downloads</span> */}
         </h1>
-        {showDownloads && showDownloads()}
+        {/* {showDownloads && showDownloads()} */}
         <div>
           <CardCarousel
             cardArray={{ array: generateMenus() }}
@@ -108,19 +87,17 @@ function SleepSounds() {
         </div>
 
         <div className="mt-[48px] mb-[172px] grid grid-cols-2 gap-4">
-          {sleepData.map((item, index) => {
-            return sleepSoundsCarouselCards(
-              item.id,
-              item.title,
-              "8am",
-              item.thumbnail,
-              "",
-              `/sleepsounds/${item.id}`,
-              item
-            );
-          })}
-
-          {generateMeditateCardArray()}
+          {/* {generateSleepCarouselCards().array}
+          {generateMeditateCardArray()} */}
+          {selectedMenu == "ALL" && allSounds}
+          {selectedMenu === "SOUNDS" && sleepSounds}
+          {selectedMenu === "MEDITATION" && meditationSounds}
+          {selectedMenu === "STORIES" && (
+            <p className="text-center w-full text-white">Coming Soon</p>
+          )}
+          {selectedMenu === "MUSIC" && (
+            <p className="text-center w-full text-white">Coming Soon</p>
+          )}
         </div>
       </div>
     </div>
@@ -129,21 +106,21 @@ function SleepSounds() {
 
 export default SleepSounds;
 
-function showDownloads() {
-  return (
-    <div className="mb-[17px]">
-      <TunuActionCard
-        heading={"You do not have any downloaded sounds"}
-        paragraph={
-          "Explore our collection of sleep stories and sounds and download your favourites. "
-        }
-        btnText={"Explore sleep sounds"}
-        color={"#12A187"}
-        btnRoute={{ link: "/sleepsounds", data: {} }}
-      />
-    </div>
-  );
-}
+// function showDownloads() {
+//   return (
+//     <div className="mb-[17px]">
+//       <TunuActionCard
+//         heading={"You do not have any downloaded sounds"}
+//         paragraph={
+//           "Explore our collection of sleep stories and sounds and download your favourites. "
+//         }
+//         btnText={"Explore sleep sounds"}
+//         color={"#12A187"}
+//         btnRoute={{ link: "/sleepsounds", data: {} }}
+//       />
+//     </div>
+//   );
+// }
 
 function sleepSoundsCarouselCards(
   index,

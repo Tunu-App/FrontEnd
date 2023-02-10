@@ -17,10 +17,9 @@ function SignUpWithPhoneOrEmail() {
   const { saveSignupData } = useContext(UserContext);
   const { signupData } = useContext(UserContext);
 
-
   const newUser = {
     firstName: signupData.firstName,
-    phoneNumber: phone,
+    phoneNumber: phone.trim(),
     password: "",
     email: email.trim().toLowerCase(),
   };

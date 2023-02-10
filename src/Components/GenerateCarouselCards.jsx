@@ -31,7 +31,7 @@ export function generateSleepCarouselCards() {
 
   const data = {
     config: {
-      itemsToShow: 1.8,
+      itemsToShow: 1.4,
     },
     array: cardArray,
   };
@@ -49,12 +49,11 @@ function sleepSoundsCarouselCards(
   data
 ) {
   return (
-    <div className="w-full">
+    <div key={index} className="w-full">
       <Link to={{ pathname: link, state: data }}>
         <div
-          key={index}
           style={{ backgroundImage: `url(${image})` }}
-          className="w-[200px] h-[200px] bg-center bg-cover rounded-[16px] p-[10px] flex flex-col justify-between "
+          className=" h-[200px] bg-center bg-cover rounded-[16px] p-[10px] flex flex-col justify-between "
         >
           <div className="flex justify-end">
             <div
@@ -89,7 +88,6 @@ export function generateMoodLftCardArray() {
     getData();
   }, []);
 
-  console.log(moodLiftersData);
   const cardArray = moodLiftersData.map((item, index) => (
     <SlidingCard
       key={index}
@@ -124,8 +122,6 @@ export function generateMeditateCardArray() {
     getData();
   }, []);
 
-  console.log(meditateData);
-
   const cardArray = meditateData.map((item, index) => {
     return generateMeditateCard(
       item.id,
@@ -151,11 +147,10 @@ export function generateMeditateCard(
   data
 ) {
   return (
-    <Link to={{ pathname: link, state: data }}>
+    <Link key={index} to={{ pathname: link, state: data }}>
       <div
-        key={index}
         style={{ backgroundImage: `url(${image})` }}
-        className="w-[165px] bg-cover bg-center h-[200px] rounded-[16px] p-[10px] flex flex-col justify-between "
+        className="w-full bg-cover bg-center h-[200px] rounded-[16px] p-[10px] flex flex-col justify-between "
       >
         <div className="flex justify-end">
           <div

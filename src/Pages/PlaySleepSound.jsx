@@ -8,20 +8,21 @@ import AudioPlayer from "../Components/AudioPlayer";
 
 function PlaySleepSound() {
   const { state } = useLocation();
+  console.log(state);
 
   return (
     <div className="pb-[100px] px-[15px]  pt-[126px] bg-[#3D55AB]">
       <div
         style={{
-          backgroundImage: `url(https://tunu-media.s3.eu-west-2.amazonaws.com/Tunusleepwallpaper.jpeg)`,
+          backgroundImage: `url(${state.thumbnail})`,
         }}
-        className="w-[345px] h-[345px]  drop-shadow-xl bg-cover bg-center rounded-[16px]"
+        className="w-full h-[345px] drop-shadow-xl bg-cover bg-center rounded-[16px]"
       ></div>
 
       <div className="mt-[46px]">
         <div className="flex justify-between items-center p-2">
           <h1 className="font-bold text-[22px] text-white">
-            {state.title ? state.title : "Unknown"}
+            {state.items.title ? state.items.title : "Unknown"}
           </h1>
           <div>{heartBlackVector(true)}</div>
         </div>
@@ -29,19 +30,19 @@ function PlaySleepSound() {
           <div className="text-center">
             <p className="text-white px-2 uppercase opacity-50">Narrator</p>
             <p className="text-white px-2">
-              {state.narrator ? state.narrator : "Unknown"}
+              {state.items.narrator ? state.items.narrator : "Unknown"}
             </p>
           </div>
           <div className="text-center ">
             <p className="text-white px-2 uppercase opacity-50">Author</p>
             <p className="text-white px-2">
-              {state.author ? state.author : "Unknown"}
+              {state.items.author ? state.items.author : "Unknown"}
             </p>
           </div>
         </div>
       </div>
       <ToastProvider>
-        <AudioPlayer audioUrl={state.mediaUrl} />
+        <AudioPlayer audioUrl={state.items.mediaUrl} />
       </ToastProvider>
     </div>
   );

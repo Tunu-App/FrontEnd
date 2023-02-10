@@ -11,17 +11,18 @@ import {
 } from "../assets/images/Vectors";
 
 function SleepSoundsDetailsPage() {
-  const { id } = useParams();
   const { state } = useLocation();
 
+  console.log(state);
 
   function generateItems() {
     const cards = state.chapters.map((items, index) => {
       return (
         <Link
+          key={index}
           to={{
             pathname: `/sleepsounds/${items.id}/:chapter${index + 1}`,
-            state: items,
+            state: { thumbnail: state.thumbnail, items },
           }}
         >
           {" "}
@@ -53,7 +54,7 @@ function SleepSoundsDetailsPage() {
 
       <div className="w-full ">
         <h1 className="font-bold text-[22px] text-white opacity-70 text-center mt-[12px] mb-[8px]">
-          Iridescent
+          {state.title}
         </h1>
 
         <p className="text-black text-center text-[#ffffffb3] flex justify-center">
