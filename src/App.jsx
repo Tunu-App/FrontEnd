@@ -43,6 +43,14 @@ import { PrivateRoute } from "./Routes/PrivateRoute";
 import MoodTrackerFinalPage from "./Pages/MoodTrackerFinalPage";
 import MoodTrackerHomePage from "./Pages/MoodTrackerHomePage";
 
+// GOOGLE ANALYTICS TRACKING ID
+import ReactGA from "react-ga"
+const TRACKING_ID = "G-54X4BNV2M3"
+
+ReactGA.initialize(TRACKING_ID)
+
+
+
 function App() {
   return (
     <UserProvider>

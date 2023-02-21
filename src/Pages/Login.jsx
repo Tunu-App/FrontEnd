@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import StyledH1Text from "../Components/StyledH1Text";
 import StyledParagraph from "../Components/StyledParagraph";
@@ -8,6 +8,7 @@ import Checkbox from "../Components/Checkbox";
 import ButtonMain from "../Components/ButtonMain";
 import BackNav from "../Components/BackNav";
 import axios from "axios";
+import ReactGA from "react-ga";
 import { useContext } from "react";
 import UserContext from "../Layout/UserContext";
 import { setUserSession } from "../service/AuthService";
@@ -26,6 +27,12 @@ function Login() {
   const { saveUserData } = useContext(UserContext);
   const { user } = useContext(UserContext);
   const [error, setError] = useState("");
+
+  // GOOGLE ANALYTICS
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   function getPassword(e) {
     setPassword(e.target.value);
