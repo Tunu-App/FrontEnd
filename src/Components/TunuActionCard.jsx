@@ -11,7 +11,7 @@ function TunuActionCard({ heading, paragraph, color, btnText, btnRoute }) {
         <h1 className="font-bold text-[22px] text-[#111111] w-full leading-[30px]">
           {heading}
         </h1>
-        <p className="w-11/12 mt-2">{paragraph}</p>
+        <p className="w-11/12 mt-2 text-[#111111]">{paragraph}</p>
         <div className="mt-4">
           <ButtonMain text={btnText} route={btnRoute} actionCard={true} />
         </div>

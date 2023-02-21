@@ -94,7 +94,7 @@ export const moodData = {
           icon: "🤔",
           mood: "Confused",
           l3: [
-            { icon: "😨", mood: "Disilusioned" },
+            { icon: "😨", mood: "Disillusioned" },
             { icon: "🙎", mood: "Perplexed" },
           ],
         },

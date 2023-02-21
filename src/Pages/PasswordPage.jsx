@@ -81,53 +81,106 @@ function PasswordPage() {
   };
 
   return (
-    <div className="flex relative flex-col">
-      <div className="fixed top-[52px] w-full">
-        <BackNav />
+    <div className="min-h-screen">
+      <div className="flex md:hidden relative flex-col">
+        <div className="fixed top-[52px] w-full">
+          <BackNav />
+        </div>
+        <div className="w-full h-[350px] bg-cover bg-center bg-no-repeat bg-[url('./assets/images/signup-password.png')]"></div>
+        <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
+          <StyledH1Text text={"Enter a password"} marginBtm={"10px"} />
+          <StyledParagraph
+            text={
+              "Protect your account with a secret password. This helps to keep away nosy neighbours."
+            }
+            marginBtm={"17px"}
+          />
+
+          <div className="mt-6 ">
+            <TextInput
+              placeholder={"Password"}
+              type={"password"}
+              getFunction={getFirstname}
+            />
+          </div>
+          <div>
+            {errorMessage.map((item) => (
+              <p className="text-red-500">{item}</p>
+            ))}
+          </div>
+
+          <div
+            onClick={() => {
+              submitForm();
+            }}
+            className="mt-[100px]"
+          >
+            <ButtonMain
+              text={"Continue"}
+              disabled={disableContBtn()}
+              route={pathDetails}
+            />
+          </div>
+
+          <div className="mt-[22px]">
+            <p className="text-[#111111] text-center">
+              Already have an account?{" "}
+              <Link to={"/login"}>
+                <span className="text-[#0E816C]">Sign in</span>{" "}
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="w-full h-[350px] bg-cover bg-center bg-no-repeat bg-[url('./assets/images/signup-password.png')]"></div>
-      <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
-        <StyledH1Text text={"Enter a password"} marginBtm={"10px"} />
-        <StyledParagraph
-          text={
-            "Protect your account with a secret password. This helps to keep away nosy neighbours."
-          }
-          marginBtm={"17px"}
-        />
+      {/* Desktop view Starts here */}
+      {/* ======================================================================================================================================================================== */}
+      <div className="hidden md:grid  relative grid-cols-5">
+        <div className="w-full bg-cover h-screen md:col-span-2 lg:col-span-3 bg-center bg-no-repeat bg-[url('./assets/images/signup-password.png')]"></div>
+        <div className=" h-full md:col-span-3 lg:col-span-2 grid place-items-center  ">
+          <div className="w-2/3">
+            <StyledH1Text text={"Enter a password"} marginBtm={"10px"} />
+            <StyledParagraph
+              text={
+                "Protect your account with a secret password. This helps to keep away nosy neighbours."
+              }
+              marginBtm={"17px"}
+            />
 
-        <div className="mt-6 ">
-          <TextInput
-            placeholder={"Password"}
-            type={"password"}
-            getFunction={getFirstname}
-          />
-        </div>
-        <div>
-          {errorMessage.map((item) => (
-            <p className="text-red-500">{item}</p>
-          ))}
-        </div>
+            <div className="mt-6 ">
+              <TextInput
+                placeholder={"Password"}
+                type={"password"}
+                getFunction={getFirstname}
+              />
+            </div>
+            <div>
+              {errorMessage.map((item) => (
+                <p className="text-red-500">{item}</p>
+              ))}
+            </div>
 
-        <div
-          onClick={() => {
-            submitForm();
-          }}
-          className="mt-[100px]"
-        >
-          <ButtonMain
-            text={"Continue"}
-            disabled={disableContBtn()}
-            route={pathDetails}
-          />
-        </div>
+            <div
+              onClick={() => {
+                submitForm();
+              }}
+              className="mt-[100px]"
+            >
+              <ButtonMain
+                text={"Continue"}
+                disabled={disableContBtn()}
+                route={pathDetails}
+              />
+            </div>
 
-        <div className="mt-[22px]">
-          <p className="text-[#111111] text-center">
-            Already have an account?{" "}
-            <Link to={"/login"}>
-              <span className="text-[#0E816C]">Sign in</span>{" "}
-            </Link>
-          </p>
+            <div className="mt-[22px]">
+              <p className="text-[#111111] text-center">
+                Already have an account?{" "}
+                <Link to={"/login"}>
+                  <span className="text-[#0E816C]">Sign in</span>{" "}
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -58,7 +58,7 @@ function MoodTrackerL3() {
         </h1>
         <h1 className="text-[#111111] font-bold text-[24px]">
           Why are you feeling{" "}
-          <span className="text-[#d3aa49]">{`${currentMood} ?`}</span> Are you ?
+          <span className="text-[#d3aa49]">{`${currentMood.toLowerCase()} ?`}</span> Are you ?
         </h1>
       </div>
 

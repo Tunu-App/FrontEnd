@@ -51,14 +51,14 @@ function MoodTrackerFinalPage() {
   }
 
   return (
-    <div className="mt-[120px] px-[15px]">
+    <div className="my-[120px] px-[15px]">
       <div className="mb-[5px]">
         <h1 className="font-bold text-[48px]">{mood.icon}</h1>
       </div>
 
       <div>
         <h1 className="text-[#111111] font-bold text-[24px]">
-          You feel <span className="text-[#12A187]">{mood.mood}</span>,
+          You feel <span className="text-[#12A187]">{mood.mood.toLowerCase()}</span>.
         </h1>
         <p className="text-[#404142]">Care to share why you feel this way?</p>
       </div>

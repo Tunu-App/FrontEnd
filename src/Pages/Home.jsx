@@ -29,8 +29,8 @@ function Home() {
         }
       >
         <h1 className="text-[#111111] text-[28px] font-bold mb-[16px]">
-          Hey{" "}
-          <span className={nightMode() ? "text-[#A5B9FF]" : "text-[#12A187]"}>
+          Hello{" "}
+          <span className={nightMode() ? "text-[#FFBD3D]" : "text-[#12A187]"}>
             {getUserName()},
           </span>
         </h1>
@@ -50,12 +50,24 @@ function Home() {
           />
         </div>
         <div className="mt-[25px] flex justify-between">
-          <h1 id="font-lato" className="font-bold font-lato">
+          <h1
+            id="font-lato"
+            className={
+              nightMode()
+                ? "font-bold font-lato text-white"
+                : "font-bold font-lato text-[#111111]"
+            }
+          >
             Moodlifters for you
           </h1>
           <div className="flex items-center ">
             <Link to={"/explore/moodlifters"}>
-              <p id="font-lato" className="mr-2 text-[#0E816C]">
+              <p
+                id="font-lato"
+                className={
+                  !nightMode() ? "mr-2 text-[#0E816C]" : "mr-2 text-[#FFBD3D]"
+                }
+              >
                 View More
               </p>
             </Link>
@@ -70,7 +82,7 @@ function Home() {
               >
                 <path
                   d="M2 2L6 6L2 10"
-                  stroke="#0E816C"
+                  stroke={nightMode() ? "#FFBD3D" : "#0E816C"}
                   strokeWidth="2"
                   strokeLinecap="square"
                 />
@@ -87,7 +99,11 @@ function Home() {
         </div>
 
         <div className="mt-[24px]">
-          <StyledH1Text text={"Enhance your sleep"} marginBtm={"14px"} />
+          <StyledH1Text
+            mode={nightMode()}
+            text={"Enhance your sleep"}
+            marginBtm={"14px"}
+          />
         </div>
 
         <div className="">
@@ -103,12 +119,24 @@ function Home() {
         </div>
 
         <div className="mt-[25px] flex justify-between">
-          <h1 id="font-lato" className="font-bold font-lato">
+          <h1
+            id="font-lato"
+            className={
+              nightMode()
+                ? "font-bold font-lato text-white"
+                : "font-bold font-lato text-[#111111]"
+            }
+          >
             Sleep sounds for you
           </h1>
           <div className="flex items-center ">
             <Link to={"/sleepsounds"}>
-              <p id="font-lato" className="mr-2 text-[#0E816C]">
+              <p
+                id="font-lato"
+                className={
+                  !nightMode() ? "mr-2 text-[#0E816C]" : "mr-2 text-[#FFBD3D]"
+                }
+              >
                 View More
               </p>
             </Link>
@@ -122,7 +150,7 @@ function Home() {
               >
                 <path
                   d="M2 2L6 6L2 10"
-                  stroke="#0E816C"
+                  stroke={nightMode() ? "#FFBD3D" : "#0E816C"}
                   strokeWidth="2"
                   strokeLinecap="square"
                 />

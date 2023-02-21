@@ -13,7 +13,7 @@ import { useContext } from "react";
 function SignUpWithPhoneOrEmail() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [useEmail, setUseEmail] = useState(false);
+  const [useEmail, setUseEmail] = useState(true);
   const { saveSignupData } = useContext(UserContext);
   const { signupData } = useContext(UserContext);
 
@@ -63,75 +63,155 @@ function SignUpWithPhoneOrEmail() {
   };
 
   return (
-    <div className="flex relative flex-col">
-      <div className="fixed top-[52px] w-full">
-        <BackNav />
-      </div>
-      <div className="w-full h-[350px] bg-cover bg-no-repeat bg-[url('./assets/images/tunu_signup_contact_details.png')]"></div>
-      <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
-        <StyledH1Text
-          text={
-            useEmail
-              ? "What is your email address"
-              : "What is your phone number"
-          }
-          marginBtm={"10px"}
-        />
-        <StyledParagraph
-          text={
-            "This helps us verify that you are a person. We are kinda biased towards humans."
-          }
-          marginBtm={"17px"}
-        />
-
-        <div className="mt-6 ">
-          {useEmail ? (
-            <TextInput
-              placeholder={"Email"}
-              getFunction={getEmail}
-              type={"text"}
-              seeText={true}
-            />
-          ) : (
-            <PhoneInput getFunction={getPhone} />
-          )}
+    <div className="min-h-screen">
+      <div className="flex md:hidden relative flex-col">
+        <div className="fixed top-[52px] w-full">
+          <BackNav />
         </div>
+        <div className="w-full h-[350px] bg-cover bg-no-repeat bg-[url('./assets/images/tunu_signup_contact_details.png')]"></div>
+        <div className="w-full h-full bg-white pt-[47px] px-4 rounded-[24px] mt-[-24px]">
+          <StyledH1Text
+            text={
+              useEmail
+                ? "What is your email address"
+                : "What is your phone number"
+            }
+            marginBtm={"10px"}
+          />
+          <StyledParagraph
+            text={
+              "This helps us verify that you are a person. We are kinda biased towards humans."
+            }
+            marginBtm={"17px"}
+          />
 
-        <div className="flex items-center justify-between mt-[24px]">
-          <p className="font-[500] text-[#404142]">Use email instead</p>
+          <div className="mt-6 ">
+            {useEmail ? (
+              <TextInput
+                placeholder={"Email"}
+                getFunction={getEmail}
+                type={"text"}
+                seeText={true}
+              />
+            ) : (
+              <PhoneInput getFunction={getPhone} />
+            )}
+          </div>
+
+          <div className="flex items-center justify-between mt-[24px]">
+            <p className="font-[500] text-[#404142]">
+              Use phone number instead
+            </p>
+            <div
+              onClick={() => {
+                setUseEmail(!useEmail);
+              }}
+              className={
+                useEmail
+                  ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
+                  : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
+              }
+            >
+              <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
+            </div>
+          </div>
           <div
             onClick={() => {
-              setUseEmail(!useEmail);
+              submitForm();
             }}
-            className={
-              useEmail
-                ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
-                : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
-            }
+            className="mt-[41px]"
           >
-            <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
+            <ButtonMain
+              text={"Continue"}
+              disabled={disableContBtn()}
+              route={pathDetails}
+            />
+          </div>
+
+          <div className="mt-[22px]">
+            <p className="text-[#111111] text-center">
+              Already have an account?{" "}
+              <Link to={"/login"}>
+                <span className="text-[#0E816C]">Sign in</span>{" "}
+              </Link>
+            </p>
           </div>
         </div>
-        <div
-          onClick={() => {
-            submitForm();
-          }}
-          className="mt-[41px]"
-        >
-          <ButtonMain
-            text={"Continue"}
-            disabled={disableContBtn()}
-            route={pathDetails}
-          />
-        </div>
+      </div>
 
-        <div className="mt-[22px]">
-          <p className="text-[#111111] text-center">
-            Already have an account?{" "}
-            <Link to={"/login"}>
-              <span className="text-[#0E816C]">Sign in</span>{" "}
-            </Link>
-          </p>
+      {/* Desktop view Starts here */}
+      {/* ======================================================================================================================================================================== */}
+      <div className="md:grid hidden h-screen grid-cols-5">
+        <div className="w-full lg:col-span-3 md:col-span-2 bg-cover bg-no-repeat bg-[url('./assets/images/tunu_signup_contact_details.png')]"></div>
+        <div className="w-full h-full  md:col-span-3 lg:col-span-2 grid place-items-center">
+          <div className="w-2/3">
+            <StyledH1Text
+              text={
+                useEmail
+                  ? "What is your email address"
+                  : "What is your phone number"
+              }
+              marginBtm={"10px"}
+            />
+            <StyledParagraph
+              text={
+                "This helps us verify that you are a person. We are kinda biased towards humans."
+              }
+              marginBtm={"17px"}
+            />
+
+            <div className="mt-6 ">
+              {useEmail ? (
+                <TextInput
+                  placeholder={"Email"}
+                  getFunction={getEmail}
+                  type={"text"}
+                  seeText={true}
+                />
+              ) : (
+                <PhoneInput getFunction={getPhone} />
+              )}
+            </div>
+
+            <div className="flex items-center justify-between mt-[24px]">
+              <p className="font-[500] text-[#404142]">
+                Use phone number instead
+              </p>
+              <div
+                onClick={() => {
+                  setUseEmail(!useEmail);
+                }}
+                className={
+                  !useEmail
+                    ? "w-[48px] h-[28px]  bg-[#12A187] justify-end flex items-center rounded-full"
+                    : "w-[48px] h-[28px] bg-[#DCDEE0]   justify-start  flex items-center rounded-full"
+                }
+              >
+                <div className="w-5 h-5 bg-white rounded-full m-[4px]"></div>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                submitForm();
+              }}
+              className="mt-[41px]"
+            >
+              <ButtonMain
+                text={"Continue"}
+                disabled={disableContBtn()}
+                route={pathDetails}
+              />
+            </div>
+
+            <div className="mt-[22px]">
+              <p className="text-[#111111] text-center">
+                Already have an account?{" "}
+                <Link to={"/login"}>
+                  <span className="text-[#0E816C]">Sign in</span>{" "}
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
