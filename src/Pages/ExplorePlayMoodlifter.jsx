@@ -21,6 +21,7 @@ function ExplorePlayMoodlifter() {
       </div>
       <AudioPlayer
         audioUrl={"https://cdn.trendybeatz.com/audio/Chike-Soldier.mp3"}
+        playSound={true}
       />
     </div>
   );

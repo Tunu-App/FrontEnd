@@ -45,6 +45,9 @@ import MoodTrackerHomePage from "./Pages/MoodTrackerHomePage";
 
 // GOOGLE ANALYTICS TRACKING ID
 import ReactGA from "react-ga"
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
+import CreateNewPassword from "./Pages/CreateNewPassword";
 const TRACKING_ID = "G-54X4BNV2M3"
 
 ReactGA.initialize(TRACKING_ID)
@@ -78,6 +81,21 @@ function App() {
             <PublicRoute
               component={VerifyPhoneNumber}
               path={"/signup-verify-phone"}
+              exact
+            />
+            <PublicRoute
+              component={ForgotPassword}
+              path={"/forgot-password"}
+              exact
+            />
+            <PublicRoute
+              component={ResetPassword}
+              path={"/reset-password"}
+              exact
+            />
+            <PublicRoute
+              component={CreateNewPassword}
+              path={"/change-password"}
               exact
             />
 

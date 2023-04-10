@@ -13,13 +13,13 @@ import { backwardsVector } from "../assets/images/Vectors";
 import SeekBar from "react-seekbar-component";
 import "react-seekbar-component/dist/index.css";
 
-function AudioPlayer({ audioUrl }) {
+function AudioPlayer({ audioUrl,playSound }) {
   const { addToast } = useToasts();
   const { pathname } = useLocation();
   let [value, setValue] = useState(0);
   const [volume, setVolume] = useState(1);
   const [seek, setSeek] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(playSound);
   let [audioDuration, setAudioDuration] = useState("00:00:00");
   let [durationForSeek, setDurationForSeek] = useState();
   let [trackProgress, setTrackProgress] = useState("00:00:00");

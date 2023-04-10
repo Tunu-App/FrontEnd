@@ -28,21 +28,21 @@ function PlaySleepSound() {
         </div>
         <div className="flex justify-between items-center mt-[12px] w-full px-[40px]">
           <div className="text-center">
-            <p className="text-white px-2 uppercase opacity-50">Narrator</p>
+            <p className="text-white px-2 uppercase opacity-50">Author</p>
             <p className="text-white px-2">
-              {state.items.narrator ? state.items.narrator : "Unknown"}
+              {state.items.narrator ? state.items.narrator : "Tunu"}
             </p>
           </div>
           <div className="text-center ">
-            <p className="text-white px-2 uppercase opacity-50">Author</p>
+            <p className="text-white px-2 uppercase opacity-50">Narrator</p>
             <p className="text-white px-2">
-              {state.items.author ? state.items.author : "Unknown"}
+              {state.items.author ? state.items.author : "Tunu"}
             </p>
           </div>
         </div>
       </div>
       <ToastProvider>
-        <AudioPlayer audioUrl={state.items.mediaUrl} />
+        <AudioPlayer audioUrl={state.items.mediaUrl} playSound={true} />
       </ToastProvider>
     </div>
   );
